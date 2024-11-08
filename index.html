@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Browser</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+
+
+</style>
+<header id="header">
+    <!-- Left-aligned buttons -->
+    <div class="header-buttons">
+        <button id="signInBtn"><i class="fas fa-search "></i></button>
+      
+        <button class="Notifications" id="Notifications" aria-label="Show Saved Links" style="border: none; background: none; cursor: pointer;">
+            <i class="fas fa-bell" id="bell-icon" style="font-size: 20px;"></i>
+           
+        </button>
+        
+      
+        
+        <style>
+            @keyframes ring {
+                0% { transform: rotate(0deg); }
+                20% { transform: rotate(10deg); }
+                40% { transform: rotate(-10deg); }
+                60% { transform: rotate(5deg); }
+                100% { transform: rotate(0deg); }
+            }
+        
+            @keyframes fadeOut {
+                0% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+        
+            .ring {
+                animation: ring 0.6s ease forwards;
+            }
+        
+            .fade-out {
+                animation: fadeOut 1s forwards; /* Fade out over 1 second */
+            }
+        </style>
+        
+        <script>
+            window.onload = function() {
+                const bellIcon = document.getElementById('bell-icon');
+                const notificationBadge = document.getElementById('notification-badge');
+                const notificationContainer = document.getElementById('notification-container');
+                let ringCount = 0;
+                const maxRings = 3;
+        
+                function ring() {
+                    if (ringCount < maxRings) {
+                        bellIcon.classList.add('ring');
+                        ringCount++;
+                        setTimeout(() => {
+                            bellIcon.classList.remove('ring');
+                            setTimeout(ring, 300); // Wait before the next ring
+                        }, 600); // Match this duration to the animation duration
+                    }
+                }
+        
+                // Start the ringing effect
+                ring();
+        
+                // Fade out the notification badge after 4 seconds
+                setTimeout(() => {
+                    notificationBadge.classList.add('fade-out');
+                    // Hide the badge after fade-out completes
+                    setTimeout(() => {
+                        notificationBadge.style.display = 'none';
+                    }, 1000); // Match this duration to the fade-out duration
+                }, 4000);
+        
+                // Show the notification container when the bell is clicked
+                document.getElementById('Notifications').addEventListener('click', function() {
+                    notificationContainer.style.display = 'block';
+                });
+            };
+        </script>
+        
+        
+       
+    </div>
+
+    <!-- Menu Button on the right side -->
+    <button id="menuBtn" class="menu-button">
+        <i class="fas fa-ellipsis-v"></i>
+    </button>
+</header>
+
+    <!-- Dropdown Menu -->
+    <div id="dropdownMenu">
+        <button>Settings</button>
+        <button>Account</button>
+        <button>Privacy</button>
+        <button>Notifications</button>
+        <button>Language</button>
+        <button>Security</button>
+        <button>Display</button>
+        <button>Theme</button>
+        <button>Accessibility</button>
+        <button>Data Usage</button>
+        <button>Sound</button>
+        <button>Help & Support</button>
+        <button>Backup</button>
+        <button>Logout</button>
+    </div>
+
+    <!-- Search Bar Section -->
+    <div class="search-bar" id="searchBar">
+        <!-- Image above the input -->
+        <img src="C:\Users\k153f_qqpvs8e\Pictures\Documents\Module 2/planet.jpg" alt="Logo" class="search-bar-image">
+        
+        <!-- Search bar input and icons -->
+        <div class="search-input-container">
+            <i class="fas fa-search icon search-icon"></i> <!-- Search Icon -->
+            <input type="text" id="searchInput" placeholder="" autocomplete="off">
+            <i class="fas fa-microphone icon mic-icon"></i> <!-- Mic Icon -->
+            <i class="fas fa-images icon images-icon"></i> <!-- Images Icon -->
+        </div>
+    </div>
+
+   <!-- Circle Buttons for Popular Websites -->
+<div class="circle-buttons">
+    <!-- Static buttons for pre-configured websites -->
+    <div class="circle-btn-container" onclick="loadWebsite('https://www.google.com')">
+        <div class="circle-btn">
+            <i class="fas fa-fire"></i>
+        </div>
+        <span class="button-text">Google</span>
+    </div>
+    
+    <div class="circle-btn-container" onclick="loadWebsite('https://www.youtube.com')">
+        <div class="circle-btn">
+            <i class="fab fa-youtube"></i>
+        </div>
+        <span class="button-text">YouTube</span>
+    </div>
+    
+    <div class="circle-btn-container" onclick="loadWebsite('https://www.facebook.com')">
+        <div class="circle-btn">
+            <i class="fab fa-facebook"></i>
+        </div>
+        <span class="button-text">Facebook</span>
+    </div>
+
+    <!-- Add Button -->
+    <div class="circle-btn-container" onclick="openAddWebsiteContainer()">
+        <div class="circle-btn">
+            <i class="fas fa-plus"></i>
+        </div>
+        <span class="button-text">Add</span>
+    </div>
+</div>  
+
+    <div class="small-buttons">
+        <button class="small-btn"><i class="fas fa-fire"></i></button>
+        <button class="small-btn"><i class="fas fa-store"></i>
+        </button>
+        <button class="small-btn"><i class="fas fa-ad"></i></button>
+        <button class="small-btn"><i class="fas fa-history"></i></button>
+        <button class="small-btn"><i class="fas fa-file"></i></button>
+    </div>
+    <!-- Add Website Container -->
+    <div id="addWebsiteContainer" class="add-website-container">
+        <input type="text" id="websiteNameInput" placeholder="Enter Website URL (e.g., https://google.com)">
+        <button onclick="addWebsite()">Add</button>
+    </div>
+
+    <!-- Search Engine Selector -->
+    <div class="search-engine-selector">
+        <select id="searchEngine">
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+           
+        </select>
+    </div>
+
+    <!-- Iframe for displaying search results -->
+    <div id="iframe-container" style="position: relative;">
+        <iframe id="resultsFrame" style="display: none; width: 100%; height: 600px;"></iframe>
+    </div>
+    
+
+    <!-- Footer Section -->
+    <div class="footer" id="footer">
+        <a href="#">Privacy Policy</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const addWebsiteContainer = document.getElementById("addWebsiteContainer");
+    const websiteNameInput = document.getElementById("websiteNameInput");
+    const circleButtons = document.querySelector(".circle-buttons");
+
+    // To keep track of added websites
+    const addedWebsites = new Set();
+
+    // Open the Add Website container
+    function openAddWebsiteContainer() {
+        addWebsiteContainer.style.display = "block"; // Show the container
+    }
+
+    // Function to add a new website
+    function addWebsite() {
+        let websiteName = websiteNameInput.value.trim();
+
+        if (websiteName === "") {
+            alert("Please enter a website URL.");
+            return;
+        }
+
+        // Ensure the user input is a valid URL format
+        websiteName = formatWebsiteURL(websiteName);
+
+        // Check if this website has already been added
+        console.log("Checking if website is already added: ", websiteName);
+        if (addedWebsites.has(websiteName)) {
+            alert("This website is already saved.");
+            return;
+        }
+
+        // Mark this website as added
+        addedWebsites.add(websiteName);
+        console.log("Website added: ", websiteName);
+        console.log("Added websites list: ", Array.from(addedWebsites));
+
+        // Extract the website name and determine if it's a profile page
+        const websiteURL = websiteName;
+        const displayName = extractWebsiteName(websiteURL); // Extract the name for the button
+        let websiteLogo = getLogo(websiteURL);  // Default logo (Clearbit API)
+        let imgSrc = websiteLogo;
+
+        // Check if it's a user profile (e.g., YouTube profile)
+        if (websiteURL.includes('youtube.com')) {
+            imgSrc = getProfileIcon(websiteURL);  // Use profile picture for YouTube
+        }
+
+        // Create the new button container
+        const newButtonContainer = document.createElement("div");
+        newButtonContainer.classList.add("circle-btn-container");
+
+        // Create the button itself (circle with icon inside)
+        const newButton = document.createElement("div");
+        newButton.classList.add("circle-btn");
+
+        // Create the image (profile picture or logo)
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = `${displayName} Logo or Profile Picture`;
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";  // Ensure it fits well inside the circle
+        img.style.borderRadius = "50%";   // Ensure the logo is fully round
+
+        // Add error handling for failed logo load
+        img.onerror = function () {
+            console.log(`Image failed to load for: ${websiteURL}, using fallback.`);
+            img.src = "https://via.placeholder.com/128?text=No+Logo";  // Fallback to a default logo
+        };
+
+        // Append the image to the button
+        newButton.appendChild(img);
+
+        // Create the text (website name) outside the button
+        const text = document.createElement("span");
+        text.classList.add("button-text");
+        text.innerText = displayName;
+
+        // Set the button's click event
+        newButton.onclick = function () {
+            loadWebsite(websiteURL);
+        };
+
+        // Append the button and text to the new container
+        newButtonContainer.appendChild(newButton);
+        newButtonContainer.appendChild(text);
+
+        // Prepend the new button container to the circle buttons container (left of the "Add" button)
+        circleButtons.insertBefore(newButtonContainer, circleButtons.firstChild);
+
+        // Hide the input container and reset the input field
+        addWebsiteContainer.style.display = "none";
+        websiteNameInput.value = ""; // Clear the input field
+    }
+
+    // Function to format website URL if necessary
+    function formatWebsiteURL(input) {
+        // Check if the input starts with http:// or https://
+        if (input.startsWith('http://') || input.startsWith('https://')) {
+            return input; // Already valid URL
+        }
+
+        // If it's a domain like 'www.x.com', ensure it has 'https://'
+        if (input.match(/^[a-zA-Z0-9.-]+$/)) {
+            const tlds = ['.com', '.org', '.net', '.co', '.io', '.gov', '.edu'];
+            let formattedURL = input;
+
+            // Add 'www.' if missing
+            if (!formattedURL.startsWith('www.')) {
+                formattedURL = 'www.' + formattedURL;
+            }
+
+            // If it doesn't have a valid TLD, add '.com'
+            if (!tlds.some(tld => formattedURL.endsWith(tld))) {
+                formattedURL += '.com'; 
+            }
+
+            return 'https://' + formattedURL; // Add https:// to the URL
+        }
+
+        return 'https://' + input; // If it's already a URL with protocol, return it as is
+    }
+
+    // Function to extract the website name (e.g., "Google" from "www.google.com")
+    function extractWebsiteName(url) {
+        const hostname = url.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+        const parts = hostname.split('.');
+
+        return parts[0].charAt(0).toUpperCase() + parts[0].slice(1);  // Capitalize the first letter
+    }
+
+    // Function to get the profile icon for YouTube (or any other specific platform)
+    function getProfileIcon(websiteURL) {
+        if (websiteURL.includes('youtube.com')) {
+            // Check if it's a specific user's profile page
+            const userProfileURL = websiteURL.split('/')[2];  // e.g., "youtube.com/user/username"
+            return `https://www.google.com/s2/favicons?domain=${userProfileURL}.youtube.com`;  // Use Google Favicon service as a fallback
+        }
+        return "https://via.placeholder.com/128?text=Profile";  // Default profile icon for other sites
+    }
+
+    // Function to get a larger logo from Clearbit (instead of favicon)
+    function getLogo(websiteURL) {
+        const domain = new URL(websiteURL).hostname;  // Get the domain from the URL
+        const logoURL = `https://logo.clearbit.com/${domain}?size=128`;  // Request a 128px logo
+
+        return logoURL;
+    }
+
+    // Function to load a website when the button is clicked
+    function loadWebsite(url) {
+        window.open(url, "_blank");
+    }
+
+    // Expose functions to global scope so they can be used in HTML inline events
+    window.openAddWebsiteContainer = openAddWebsiteContainer;
+    window.addWebsite = addWebsite;
+});
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.querySelector(".search-icon");
+    const searchEngineSelect = document.getElementById("searchEngine");
+    const iframe = document.getElementById("resultsFrame");
+    const iframeContainer = document.getElementById("iframe-container");
+    const menuButton = document.getElementById("menuBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const header = document.getElementById("header");
+    const footer = document.getElementById("footer");
+
+    let currentEngine = "google";  // Default search engine
+
+    // Update search engine when user selects a different one
+    searchEngineSelect.addEventListener("change", function() {
+        currentEngine = searchEngineSelect.value;
+    });
+
+    // Check if input is a valid URL
+    function isValidURL(url) {
+        const regex = /^(http:\/\/|https:\/\/|www\.)[a-z0-9-]+(\.[a-z]{2,})+/;
+        return regex.test(url);
+    }
+
+    // Format URL to add http:// if missing
+    function formatURL(url) {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            return 'http://' + url;
+        }
+        return url;
+    }
+
+    // Perform search or load URL in iframe
+    function performSearch() {
+        const query = searchInput.value.trim();
+
+        if (query === "") return;
+
+        // Hide the iframe and close button before starting a new search
+        resetIframeAndButton();
+
+        header.classList.add("hide-header-footer");
+        footer.classList.add("hide-header-footer");
+
+        if (isValidURL(query)) {
+            const formattedURL = formatURL(query);
+            fetchProxiedContent(formattedURL);
+        } else {
+            let searchURL = "";
+            switch (currentEngine) {
+                case "google":
+                    // Load Google search results inside the iframe
+                    searchURL = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                    iframe.src = searchURL;
+                    iframe.style.display = 'block';
+                    document.title = "mybro - search";  // Change tab title when iframe is shown
+                    addCloseButton();  // Add the close button when iframe is shown
+                    break;
+
+                case "duckduckgo":
+                    // Load DuckDuckGo search results inside the iframe
+                    searchURL = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+                    iframe.src = searchURL;
+                    iframe.style.display = 'block';
+                    document.title = "mybro - search";
+                    addCloseButton();
+                    break;
+
+                case "bing":
+                    // Load Bing search results inside the iframe
+                    searchURL = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+                    iframe.src = searchURL;
+                    iframe.style.display = 'block';
+                    document.title = "mybro - search";
+                    addCloseButton();
+                    break;
+            }
+        }
+    }
+
+    // Function to fetch and load content from the proxy API
+    function fetchProxiedContent(url) {
+        fetch(`http://localhost:3000/proxy?url=${encodeURIComponent(url)}`)
+            .then(response => response.text())
+            .then(data => {
+                iframe.srcdoc = data;
+                iframe.style.display = 'block';
+                document.title = "mybro - search";  // Change tab title when iframe is shown
+                addCloseButton();  // Add the close button when iframe is shown
+            })
+            .catch(error => {
+                console.error("Error fetching content: ", error);
+            });
+    }
+
+    // Add a close button to the bottom-left of the screen
+    function addCloseButton() {
+        // Check if the button already exists to prevent adding duplicates
+        if (document.getElementById("closeButton")) {
+            return;
+        }
+
+        const closeButton = document.createElement("button");
+        closeButton.id = "closeButton";  // Give it an ID for reference
+        closeButton.textContent = "Close";
+        closeButton.style.position = "fixed";  // Fixed positioning
+        closeButton.style.bottom = "0";  // 0 from the bottom of the viewport
+        closeButton.style.left = "0";  // 0 from the left of the viewport
+        closeButton.style.backgroundColor = "red";
+        closeButton.style.color = "white";
+        closeButton.style.border = "none";
+        closeButton.style.padding = "10px";
+        closeButton.style.cursor = "pointer";
+        closeButton.style.zIndex = "9999";  // Ensure it's on top of other elements
+
+        // Append the button to the body (so it's fixed on the screen)
+        document.body.appendChild(closeButton);
+
+        // Close the iframe when the button is clicked
+        closeButton.addEventListener("click", function() {
+            resetIframeAndButton();
+        });
+    }
+
+    // Reset iframe and close button visibility
+    function resetIframeAndButton() {
+        iframe.style.display = 'none';  // Hide the iframe
+        const closeButton = document.getElementById("closeButton");
+        if (closeButton) {
+            closeButton.remove();  // Remove the close button
+        }
+        header.classList.remove("hide-header-footer");
+        footer.classList.remove("hide-header-footer");
+    }
+
+    // Change the title temporarily when a link opens in a new tab
+    iframe.addEventListener('load', function() {
+        const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+        // Listen for clicks inside the iframe
+        iframeDocument.addEventListener('click', function(event) {
+            if (event.target.tagName === 'A' && event.target.target === '_blank') {
+                // Change tab title temporarily for 3 seconds
+                const originalTitle = document.title; // Store original tab title
+                document.title = "mybro - search";
+
+                // After 3 seconds, reset the tab title
+                setTimeout(() => {
+                    document.title = originalTitle;
+                }, 3000);
+            }
+        });
+    });
+
+    // Trigger search on button click or Enter key press
+    searchButton.addEventListener("click", performSearch);
+    searchInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            performSearch();
+        }
+    });
+
+    // Menu button and dropdown toggle
+    menuButton.addEventListener("click", function() {
+        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener("click", function(event) {
+        if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.style.display = "none";
+        }
+    });
+});
+
+
+
+    </script>
+
+</body>
+</html>
