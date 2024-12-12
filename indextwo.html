@@ -1,0 +1,2755 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tulu</title>
+    <meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tulu</title>
+<link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="stayle.css">
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <style>
+
+
+      
+/* Footer styles */
+.footer {
+    display: flex; /* Show footer by default */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 47px;
+    right: 0;
+    background-color: #ffffff; /* Light background */
+    color: black; /* Text color */
+    padding: 3px 5px; /* Reduced padding for mobile */
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+body.dark-mode .footer {
+ 
+    background-color: #000000; /* Light background */
+   
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: space-around; /* Space buttons evenly */
+    width: 100%; /* Full width for even spacing */
+}
+body.dark-mode .footer button {
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    color: rgb(255, 255, 255);
+    text-align: center; /* Text color */
+    padding: 8px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.9rem; /* Smaller font size */
+    display: flex;
+    flex-direction: column; /* Stack icon and text */
+    align-items: center; /* Center align items */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition for effects */
+}
+
+.footer button {
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    color: black;
+    text-align: center; /* Text color */
+    padding: 8px;
+    margin-top: -1px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.9rem; /* Smaller font size */
+    display: flex;
+    flex-direction: column; /* Stack icon and text */
+    align-items: center; /* Center align items */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transition for effects */
+}
+
+.footer button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Hover effect */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Icon styles */
+.footer button i {
+    font-size: 1.2rem; /* Icon size */
+    margin-bottom: 4px; /* Space between icon and text */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+    .footer button {
+        font-size: 0.9rem; /* Smaller font size on small screens */
+    }
+}
+
+
+
+        /* Hide footer on larger screens */
+        @media screen and (min-width: 75em) {
+            .footer {
+                display: none; /* Hide footer */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="search-container">
+            <div class="input-container">
+                <button id="back-button" aria-label="Go Back">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button id="forward-button" aria-label="Go Forward">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <button id="reload-button" aria-label="Reload">
+                    <i class="fas fa-redo-alt" id="reload-icon"></i>
+                </button>
+                
+                <input type="text" id="search-input" aria-label="" />
+                
+                <button class="mic-button" id="mic-button" aria-label="Voice Search">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="tab-button" id="tab-button" aria-label="Voice Search" style="margin-left: 1243px; background: none; border:none; font-size: 18px; color: #005f8d; position: absolute;">
+                    <i class="fas fa-folder"></i>
+                </button>
+                
+
+               
+                
+                
+               
+                
+                
+                <button id="search-button" aria-label="Search">
+                    <i class="fas fa-search "></i>
+
+                </button>
+               
+                <button class="star-button" id="star-button" aria-label="Show Saved Links">
+                    <i class="fas fa-bookmark"  id="star-icon"></i>
+                </button>
+                <button class="store" id="store" aria-label="Show Saved Links">
+                    <i class="fas fa-store"></i>
+                </button>
+                <button class="Security" id="Security" aria-label="Show Saved Links">
+                    <i class="fas fa-fire"></i>
+                </button>
+               
+                <button class="Notifications" id="Notifications" aria-label="Show Saved Links" style="border: none; background: none; cursor: pointer;">
+                    <i class="fas fa-bell" id="bell-icon" style="font-size: 20px;"></i>
+                    <span id="notification-badge" style="position: absolute; top: -5px; right: -10px; background: linear-gradient(to right, rgb(37, 114, 158), rgb(34, 174, 179)); color: white; border-radius: 5000px; padding: 2px 5px; font-size: 12px;">2</span>
+                </button>
+                
+              
+                
+                <style>
+                    @keyframes ring {
+                        0% { transform: rotate(0deg); }
+                        20% { transform: rotate(10deg); }
+                        40% { transform: rotate(-10deg); }
+                        60% { transform: rotate(5deg); }
+                        100% { transform: rotate(0deg); }
+                    }
+                
+                    @keyframes fadeOut {
+                        0% { opacity: 1; }
+                        100% { opacity: 0; }
+                    }
+                
+                    .ring {
+                        animation: ring 0.6s ease forwards;
+                    }
+                
+                    .fade-out {
+                        animation: fadeOut 1s forwards; /* Fade out over 1 second */
+                    }
+                </style>
+                
+                <script>
+                    window.onload = function() {
+                        const bellIcon = document.getElementById('bell-icon');
+                        const notificationBadge = document.getElementById('notification-badge');
+                        const notificationContainer = document.getElementById('notification-container');
+                        let ringCount = 0;
+                        const maxRings = 3;
+                
+                        function ring() {
+                            if (ringCount < maxRings) {
+                                bellIcon.classList.add('ring');
+                                ringCount++;
+                                setTimeout(() => {
+                                    bellIcon.classList.remove('ring');
+                                    setTimeout(ring, 300); // Wait before the next ring
+                                }, 600); // Match this duration to the animation duration
+                            }
+                        }
+                
+                        // Start the ringing effect
+                        ring();
+                
+                        // Fade out the notification badge after 4 seconds
+                        setTimeout(() => {
+                            notificationBadge.classList.add('fade-out');
+                            // Hide the badge after fade-out completes
+                            setTimeout(() => {
+                                notificationBadge.style.display = 'none';
+                            }, 1000); // Match this duration to the fade-out duration
+                        }, 4000);
+                
+                        // Show the notification container when the bell is clicked
+                        document.getElementById('Notifications').addEventListener('click', function() {
+                            notificationContainer.style.display = 'block';
+                        });
+                    };
+                </script>
+                
+                
+                
+                
+
+
+                <button class="links-button" id="links-button" aria-label="Show Saved Links">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <select id="search-engine" aria-label="Select search engine" onchange="redirectToSearch()">
+                    
+                    <option value="https://www.google.com/search?q=">Google</option>
+                    <option value="https://www.bing.com/search?q=">Bing</option>
+                    <option value="https://duckduckgo.com/search?q=">DuckDuckGo</option>
+                    <option value="https://search.yahoo.com/search?p=">Yahoo</option>
+                    <option value="https://www.ecosia.org/search?q=">Ecosia</option>
+                    <option value="https://www.startpage.com/do/search?q=">Startpage</option>
+                </select>
+    
+                <button id="settings-button" aria-label="Settings">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </div>
+        <script>
+            document.getElementById("settings-two-button").addEventListener("click", function() {
+    document.getElementById("settings-button").click(); // Trigger a click on the settings button
+});
+
+// Optional: Add functionality to settings button if needed
+document.getElementById("settings-button").addEventListener("click", function() {
+    // Your settings logic here
+    alert("Settings button clicked!"); // Example action
+});
+
+        </script>
+       
+       
+        <div class="links-container" id="links-container">
+            <div class="links-content">
+                <span class="close-links" id="close-links-button">✖</span>
+                <div class="logo-container">
+                   
+                </div>
+        <div class="links-buttons">
+            <div class="button-container">
+                <div class="small-buttons">
+                    <button class="small-button"><i class="fas fa-microphone"></i></button>
+                    <button class="small-button"><i class="fas fa-tag"></i></button>
+                    <button class="small-button"><i class="fas fa-fire"></i></button>
+                    <button class="small-button"><i class="fas fa-bell"></i></button>
+                    <button class="small-button"><i class="fas fa-history"></i></button>
+                    <button class="small-button"><i class="fas fa-"></i></button>
+                </div>
+                
+                <img src="https://www.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail" class="button-logo">
+                <button class="link-button">Gmail</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Google_Images_icon.png/640px-Google_Images_icon.png" alt="Images" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-images.png" alt="Images" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Images</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Google_Maps_icon.svg/2048px-Google_Maps_icon.svg.png" alt="Maps" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-maps-new.png" alt="Maps" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Maps</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Google_Drive_Icon.png/640px-Google_Drive_Icon.png" alt="Drive" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-drive.png" alt="Drive" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Drive</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Google_Docs_Icon.png/640px-Google_Docs_Icon.png" alt="Docs" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-docs.png" alt="Docs" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Docs</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Google_Sheets_Icon.png/640px-Google_Sheets_Icon.png" alt="Sheets" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-sheets.png" alt="Sheets" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Sheets</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Google_Calendar_icon_%282020-2021%29.png/640px-Google_Calendar_icon_%282020-2021%29.png" alt="Calendar" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-calendar.png" alt="Calendar" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Calendar</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Google_Keep_icon.svg/640px-Google_Keep_icon.svg.png" alt="Keep" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-keep.png" alt="Keep" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Keep</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Google_Contacts_icon.png/640px-Google_Contacts_icon.png" alt="Contacts" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-contacts.png" alt="Contacts" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Contacts</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Google_Meet_icon.svg/640px-Google_Meet_icon.svg.png" alt="Meet" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-meet.png" alt="Meet" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Meet</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Slides_icon.svg/640px-Google_Slides_icon.svg.png" alt="Slides" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-slides.png" alt="Slides" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Slides</button>
+            </div>
+            <div class="button-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Google_Play_icon.svg/640px-Google_Play_icon.svg.png" alt="Play" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <img src="https://img.icons8.com/color/48/000000/google-play.png" alt="Play" class="button-logo" onerror="this.style.display='none'; this.previousElementSibling.style.display='inline';">
+                <button class="link-button">Play</button>
+            </div>
+            <!-- Add more Google apps as needed -->
+        </div>
+    </div>
+</div>
+
+    </header>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notification Container</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+        <style>
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            button:hover {
+                transform: scale(1.05);
+            }
+            #notification-container::-webkit-scrollbar {
+                display: none;
+            }
+            #notification-container {
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <div id="notification-container" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 600px; height: 80%; border-radius: 30px; padding: 20px; overflow: hidden; z-index: 1000; animation: fadeIn 0.5s;">
+            
+            <style>
+                @keyframes gradient-animation {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                }
+    
+                #notification-container {
+                    background: linear-gradient(135deg, #2c3e50, #4b79a1, #2c3e50);
+
+                    background-size: 200% 200%;
+                    animation: gradient-animation 6s ease infinite;
+                    transition: box-shadow 0.3s ease, transform 0.3s ease;
+                    border-radius: 20px;
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                }
+    
+                #notification-container:hover {
+                    background: linear-gradient(135deg, #2c3e50, #4b79a1, #2c3e50);
+
+background-size: 200% 200%;
+animation: gradient-animation 6s ease infinite;
+transition: box-shadow 0.3s ease, transform 0.3s ease;
+                   
+                }
+            </style>
+    
+            <button onclick="closeNotification()" style="position: absolute; top: 15px; left: 15px; padding: 10px; background: transparent; border: none; cursor: pointer; font-size: 24px; color: #fff; transition: color 0.3s;"> <i class="fas fa-arrow-left"></i></button>
+            <button id="settings-button" onclick="toggleSettings(event)" style="position: absolute; top: 15px; right: 15px; padding: 10px; background: transparent; border: none; cursor: pointer; font-size: 24px; color: #fff; transition: color 0.3s;"><i class="fas fa-ellipsis"></i></button>
+    
+            <div style="text-align: center; margin: 20px 0;">
+                <img id="notification-image" src="notification.PNG" alt="Your Image" style="max-width: 50%; height: auto; border-radius: 10px;"/>
+            </div>
+    
+            <p style="font-size: 24px; text-align: center; color: #fff; font-weight: 500; letter-spacing: 0.5px; max-width: 500px; margin: 20px auto;">
+                Discover a world of seamless connections! Manage your accounts effortlessly and stay in touch with what matters most, all in one place.
+            </p>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="account-settings-button" onclick="handleGetStarted()" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 50px; cursor: pointer; margin: 5px; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; font-size: 18px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Get Started</button>
+            </div>
+            
+            <style>
+            #account-settings-button:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+            }
+            </style>
+            
+            <!-- Settings Panel -->
+            <div id="settings-panel" style="display: none; position: absolute; top: 55px; right: 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; background: rgba(255, 254, 254, 0.9); border-radius: 20px; padding: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+                <div style="padding: 10px;">
+                    <button onclick="closeNotification()" style="padding: 8px; background-color: #c8e4e1; color: rgb(73, 69, 69); border: none; border-radius: 50px; cursor: pointer; width: 100%;">Don't Show Again</button>
+                </div>
+                <div style="padding: 10px;">
+                    <button onclick="shareContent()" style="padding: 8px; background-color: #c8e4e1; color: rgb(73, 69, 69); border: none; border-radius: 50px; cursor: pointer; width: 100%;">Share</button>
+                </div>
+                <div style="padding: 10px;">
+                    <button onclick="openHelp()" style="padding: 8px; background-color: #c8e4e1; color: rgb(73, 69, 69); border: none; border-radius: 50px; cursor: pointer; width: 100%">Learn More</button>
+                </div>
+                <div style="padding: 10px;">
+                    <button onclick="handleGetStarted()" style="padding: 8px; background-color: #c8e4e1; color: rgb(73, 69, 69); border: none; border-radius: 50px; cursor: pointer; width: 100%">Get Started</button>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            function closeNotification() {
+                document.getElementById('notification-container').style.display = 'none';
+            }
+    
+            function toggleSettings(event) {
+                event.stopPropagation(); // Prevent click event from bubbling up
+                const settingsPanel = document.getElementById('settings-panel');
+                if (settingsPanel.style.display === 'none' || settingsPanel.style.display === '') {
+                    settingsPanel.style.display = 'block';
+                    settingsPanel.style.maxHeight = '400px'; // Adjust for content
+                } else {
+                    settingsPanel.style.maxHeight = '0';
+                    setTimeout(() => { settingsPanel.style.display = 'none'; }, 300);
+                }
+            }
+    
+            // Close settings panel when clicking outside of it
+            document.addEventListener('click', (event) => {
+                const settingsPanel = document.getElementById('settings-panel');
+                const settingsButton = document.getElementById('settings-button');
+    
+                if (settingsPanel.style.display === 'block' && !settingsPanel.contains(event.target) && !settingsButton.contains(event.target)) {
+                    settingsPanel.style.maxHeight = '0';
+                    setTimeout(() => { settingsPanel.style.display = 'none'; }, 300);
+                }
+            });
+    
+            function saveScreenshot() {
+                const container = document.getElementById('notification-container');
+                html2canvas(container).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = imgData;
+                    link.download = 'notification-screenshot.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+            }
+    
+            function shareContent() {
+                alert("Share this content with your friends!");
+            }
+    
+            function openHelp() {
+                alert("Opening help documentation...");
+            }
+    
+            function handleGetStarted() {
+                alert("Getting started...");
+            }
+        </script>
+    </body>
+    </html>
+    
+    
+    <script>
+        let isSignedIn = false; // Change this based on actual sign-in logic
+    
+        function handleGetStarted() {
+            if (!isSignedIn) {
+                showSignInModal();
+            } else {
+                // Proceed with "Get Started" functionality for signed-in users
+                console.log("Proceeding to get started...");
+            }
+        }
+    
+        function showSignInModal() {
+            document.getElementById('sign-in-modal').style.display = 'block';
+        }
+    
+        function closeSignInModal() {
+            document.getElementById('sign-in-modal').style.display = 'none';
+        }
+    
+        function handleSignIn(event) {
+            event.preventDefault();
+            // Add your sign-in logic here (e.g., API call)
+            isSignedIn = true; // Simulate a successful sign-in
+            console.log("User signed in.");
+            closeSignInModal(); // Optionally keep this line or modify the behavior as needed
+        }
+    
+        function closeNotification() {
+            document.getElementById('notification-container').style.display = 'none';
+        }
+    
+        function showSettings() {
+            // Implement settings logic here
+            console.log("Show settings...");
+        }
+    </script>
+    
+    </body>
+    </html>
+    
+    
+    <script>
+        let allEmails = [];
+    
+        function closeNotification() {
+            document.getElementById('notification-container').style.display = 'none';
+        }
+        
+        function showAccountSettings() {
+            document.getElementById('account-settings').style.display = 'block';
+        }
+        
+        function closeAccountSettings() {
+            document.getElementById('account-settings').style.display = 'none';
+        }
+        
+        function showSettings() {
+            document.getElementById('settings-t').style.display = 'block';
+        }
+        
+        function closeSettings_t() {
+            document.getElementById('settings-t').style.display = 'none';
+        }
+    
+        function updateEmailField() {
+            const service = document.getElementById('service').value;
+            const emailInput = document.getElementById('email');
+    
+            const domains = {
+                gmail: '@gmail.com',
+                yahoo: '@yahoo.com',
+                outlook: '@outlook.com',
+                facebook: '@facebook.com',
+                twitter: '@twitter.com'
+            };
+    
+            if (service && domains[service]) {
+                emailInput.value = ''; // Clear the email input
+                emailInput.focus(); // Set focus to the email input
+                emailInput.setAttribute('placeholder', `Enter your email`);
+                emailInput.value = domains[service]; // Set the domain
+                emailInput.selectionStart = 0; // Move cursor to the left of the @
+            }
+        }
+        
+        function connectAccounts(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value.replace('@', ''); // Remove the '@' for email processing
+            const password = document.getElementById('password').value;
+            const service = document.getElementById('service').value;
+    
+            const newEmails = fetchEmails(service);
+            allEmails = allEmails.concat(newEmails);
+    
+            populateNotifications();
+    
+            // Hide image, button, and message, and close settings
+            document.getElementById('notification-image').style.display = 'none';
+            document.getElementById('account-settings-button').style.display = 'none';
+            document.getElementById('quick-simple-secure').style.display = 'none'; // Hide the message
+            closeAccountSettings();
+            document.getElementById('notification-container').style.display = 'block';
+        }
+        
+        function fetchEmails(service) {
+            const emails = {
+                gmail: [
+                    { subject: "Welcome to Gmail!", from: "noreply@gmail.com", time: "2 hours ago" },
+                    { subject: "New features in Gmail", from: "updates@gmail.com", time: "3 hours ago" }
+                ],
+                yahoo: [
+                    { subject: "Yahoo News Update", from: "news@yahoo.com", time: "1 hour ago" },
+                    { subject: "Account Security Alert", from: "support@yahoo.com", time: "4 hours ago" }
+                ],
+                outlook: [
+                    { subject: "Outlook Tips", from: "tips@outlook.com", time: "30 minutes ago" }
+                ],
+                facebook: [
+                    { subject: "Facebook Update", from: "noreply@facebook.com", time: "1 day ago" }
+                ],
+                twitter: [
+                    { subject: "Twitter Notification", from: "notifications@twitter.com", time: "2 days ago" }
+                ]
+            };
+    
+            return emails[service] || [];
+        }
+    
+        function populateNotifications() {
+            const notificationList = document.getElementById('notification-list');
+            notificationList.innerHTML = ''; // Clear existing notifications
+            allEmails.forEach(email => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${email.subject} from ${email.from} - ${email.time}`;
+                notificationList.appendChild(listItem);
+            });
+        }
+    </script>
+    
+    <style>
+
+    </style>
+       
+  <style>
+  .small-buttons {
+    position: absolute;
+    top: -20px; 
+    left: 20px;/* Adjust the distance from the top */
+    text-align: center;
+    display: flex; /* Align buttons horizontally */
+    gap: 15px; 
+    margin: 0px;
+    margin-bottom: 0px;/* Space between buttons */
+}
+
+.small-button {
+    background: transparent; /* No background initially */
+    border: none; /* No border */
+    color: rgb(172, 217, 243); /* Button color */
+    font-size: 1.2rem; /* Size of the icon */
+    cursor: pointer;
+    margin-top: 30px; /* Pointer cursor on hover */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.small-button:hover {
+    color: #357ae8; /* Change color on hover */
+}
+
+    .links-container {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 340px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 0.3s ease; /* Smooth transition for visibility */
+        opacity: 0; /* Initial opacity */
+    }
+
+    .links-container.show {
+        display: flex; /* Show the container */
+        opacity: 1; /* Fully visible */
+    }
+   
+    .links-content {
+        background: black; /* White background for the content */
+        border: 5px solid #82b0db; /* Blue border */
+        padding: 20px;
+        border-radius: 27px; /* Rounded corners */
+        box-shadow: 0 14px 20px rgba(16, 93, 151, 0.9);
+        text-align: center;
+        width: 90%;
+        max-width: 350px; /* Wider for more buttons */
+        overflow-y: auto; /* Enable vertical scrolling */
+        max-height: 400px; /* Set your desired height */
+        position: relative; /* Set relative positioning for the close button */
+    }
+
+    .main-logo {
+        width: 50px; /* Adjust logo size */
+        height: 50px; /* Ensure it is a circle */
+        border-radius: 10%; /* Circular logo */
+        object-fit: cover; /* Maintain aspect ratio */
+    }
+
+    .logo-container {
+        margin-bottom: 15px; /* Space below the logo */
+    }
+
+    .links-buttons {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center; /* Center buttons */
+        gap: 20px;
+        top: 463px; /* Space between button containers */
+    }
+
+    .button-container {
+        display: flex;
+        
+        flex-direction: column; /* Stack logo and button vertically */
+        align-items: center; /* Center logo and button */
+        text-align: center; /* Center text */
+    }
+
+    .button-logo {
+        width: 50px; /* Size of button logo */
+        height: 50px; /* Ensure it is a circle */
+        border-radius: 10%; /* Circular logo */
+        margin-bottom: 5px; /* Space between logo and button */
+    }
+
+    .link-button {
+        padding: 10px 1px; 
+        background-color: transparent; /* No background initially */
+        color: rgb(172, 217, 243);
+        border: none;
+        border-radius: 20px; 
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        min-width: 80px; /* Minimum button width */
+    }
+
+    .link-button:hover {
+        background-color: #357ae8; /* Darker blue on hover */
+        transform: translateY(-2px); /* Lift effect on hover */
+    }
+
+    .link-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5); /* Custom focus outline */
+    }
+
+    .close-links {
+        cursor: pointer;
+        font-size: 1.5rem;
+        position: absolute; /* Change to absolute positioning */
+        top: 9px; /* Adjust to desired distance from the top */
+        right: 15px; /* Adjust to desired distance from the right */
+        color: white; /* Close button color */
+    }
+
+   
+
+</style>
+
+        
+        <script>
+        // Function to open the links container
+        function openLinksContainer() {
+            const linksContainer = document.getElementById('links-container');
+            linksContainer.classList.add('show'); // Add class to show
+        }
+        
+        // Function to close the links container
+        function closeLinksContainer() {
+            const linksContainer = document.getElementById('links-container');
+            linksContainer.classList.remove('show'); // Remove class to hide
+        }
+        
+        // Event listener for the links button
+        document.getElementById('links-button').addEventListener('click', openLinksContainer);
+        
+        // Event listener for the close button
+        document.getElementById('close-links-button').addEventListener('click', closeLinksContainer);
+        
+        // Close the container when clicking outside of it
+        document.getElementById('links-container').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeLinksContainer();
+            }
+        });
+        </script>
+        
+    
+    <script src="smaller-devices.js"></script>
+    <script src="mic-&-input.js"></script>
+    
+    <link rel="stylesheet" href="back-forward-reload.css">
+    <script src="back-forard-reload.js"></script>
+    
+    <body>
+    
+        <div class="content" id="content" style="display: none;">
+            <iframe id="result-frame" title="Your Results" src="your-content-url.html"></iframe>
+        </div>
+        <div class="loader-container" id="loaderContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <script src="script.js"></script>
+        </body>
+        
+        <style>
+         
+   
+.loader-container {
+    width: 100%;
+    height: 3px;
+    background-color: none;
+    position: fixed;
+    top: 46px; /* Adjust based on your layout */
+    left: 0;
+    z-index: 1000;
+    opacity: 1; /* Initial opacity */
+    transition: opacity 0.5s ease; /* Smooth opacity transition */
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #3964f0, #ff2c2c);
+    transition: width 0.2s ease; /* Smooth transition for width */
+}
+
+
+.content {
+    margin-top: 0; /* Space for loader */
+    height: calc(100vh - 50px); /* Full height minus loader */
+    overflow: hidden; /* Hide iframe until loaded */
+}
+
+#result-frame {
+    width: 100%;
+    height: 100%;
+    border: none; /* Remove default border */
+    display: block; /* Ensures the iframe is block-level */
+}
+
+        </style>
+ <div class="tabs-container" id="tabs-container" style="display: none;">
+    <style>
+        .close-tab-button, .settings-t-button {
+          position: absolute;
+          font-size: 24.4px;
+          border: none;
+          background: none;
+          cursor: pointer;
+          transition: transform 0.2s, color 0.2s;
+          color: #333; /* Default color */
+        }
+      
+        .close-tab-button:hover, .settings-t-button:hover {
+          transform: scale(1.1); /* Slightly enlarge on hover */
+          color: #c2ecff; /* Change color on hover */
+        }
+      
+        .close-tab-button {
+          top: 10px;
+          left: 10px;
+        }
+      
+        .settings-t-button {
+          top: 10px;
+          right: 10px;
+          color: #333; /* Default color */
+        }
+      </style>
+      
+      <button class="close-tab-button" id="close-tab-button">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="settings-t-button" id="settings-two-button">
+        <i class="fas fa-ellipsis-v"></i>
+      </button>
+      
+    
+    <!-- Title text -->
+    <h2 style="margin: 20px 0; text-align: center;">Your Tabs</h2>
+
+    <!-- Your own image -->
+   
+
+    <!-- Tab content -->
+    <div class="tabs" id="tabs" style="text-align: center;"></div>
+</div>
+
+<style>
+    #my-image {
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px; /* Make the image responsive */
+    height: auto;    /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: add some rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+}
+
+  .tabs-container {
+    display: none; /* Initially hide tabs container */
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 660px;
+    height: 90%; /* You can adjust this as needed */
+    max-height: 80%; /* Set a maximum height for scrolling */
+    text-align: center;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+}
+
+
+    .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .tabs {
+    display: flex;
+    justify-content: center; /* Centers the tabs horizontally */
+    flex-wrap: wrap; /* Allows the tabs to wrap to the next line if necessary */
+}
+
+.tab {
+    background-color: #4e6780;
+    padding: 10px;
+    margin: 10px; /* Adjusted to have equal margins on all sides */
+    width: 277px;
+    border-radius: 7px;
+    height: 290px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+
+
+
+    .tab img {
+        width: 100%;
+        height: 80px;
+        border-radius: 5px;
+    }
+
+    .remove-btn {
+        position: absolute;
+        top: -13px;
+        left: -13px;
+        cursor: pointer;
+        background: rgb(110, 135, 189);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+    }
+
+    body.dark-mode .tab {
+        background-color: #455a64; /* Dark mode tab color */
+    }
+
+    .tab:hover {
+        background-color: #3a536b; /* Hover color */
+    }
+
+    button {
+        margin: 10px;
+    }
+
+body.dark-mode .close-tab-button, 
+body.dark-mode .settings-t-button {
+    color: #ffffff; /* Dark mode button color */
+}
+
+body.dark-mode .tabs-container {
+    background-color: #1e1e1e; /* Dark mode background for tabs */
+    border: 1px solid #333; /* Darker border */
+}
+
+body.dark-mode .tab {
+    background-color: #455a64; /* Dark mode tab color */
+    color: #ffffff; /* Tab text color */
+}
+
+body.dark-mode .tab:hover {
+    background-color: #546e7a; /* Dark mode hover color */
+}
+
+body.dark-mode .remove-btn {
+    background: #d32f2f; /* Dark mode remove button color */
+}
+</style>
+
+    
+    <script src="history.js"></script>
+   
+    <style>
+
+    </style>
+        
+    <div class="history-container" id="history-container">
+        <h4>History</h4>
+        <div class="button-group">
+            <button class="config-button"><i class="fas fa-cog"></i></button>
+            <button id="clear-history-button"><i class="fas fa-trash"></i></button>
+        </div>
+        <div id="history-list"></div>
+        <button id="close-history-btn" class="close-button">✖</button> <!-- Changed id here -->
+    </div>
+    <script>
+        document.getElementById('close-history-btn').addEventListener('click', function() {
+    document.getElementById('history-container').style.display = 'none';
+});
+
+    </script>
+    
+    <script src="settings.js"></script>
+    <div class="saved-websites" id="saved-websites-container">
+        <button id="new-close-button" class="close-button-one">✖</button>
+        <h4>Favorites</h4>
+        <div id="saved-websites-list"></div>
+        <button id="add-website-button" class="floating-button">
+            <i class="fas fa-add"></i>
+        </button>
+      
+        <div id="settings-menu" class="settings-menu">
+            <button class="settings-option">Option 1</button>
+            <button class="settings-option">Option 2</button>
+        </div>
+    </div>
+    
+    <style>
+       .floating-button {
+    background-color: #4caf86; /* Green */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.6);
+    position: absolute; /* Positioning */
+}
+
+#add-website-button {
+    top: 10px; /* Distance from the top */
+    right: 70px; /* Position from the right (left of settings button) */
+}
+
+.settings-button {
+    top: 10px; /* Align with the add button */
+    right: 10px; /* Closest to the right side of the container */
+}
+
+.settings-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 10px; /* Align with the floating buttons */
+    right: 70px; /* Adjust to align the menu */
+    background-color: white; /* Background for the menu */
+    border: 1px solid #ccc; /* Border for the menu */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.settings-option {
+    display: block; /* Stack options vertically */
+    padding: 10px; /* Padding for options */
+    cursor: pointer;
+    border-bottom: 1px solid #eee; /* Separator line */
+}
+
+.settings-option:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+.settings-option:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+
+    </style>
+    
+    <style>
+              /* Container for saved websites and history */
+      /* Common styling for both normal and dark modes */
+.saved-websites, .history-container {
+    max-height: 600px;
+    height: 500px;
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 20px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Responsive width */
+    max-width: 600px; /* Maximum width for larger screens */
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #ffffff, #f8c8d4, #f8e6e9, #ffe5e0);
+}
+
+/* Dark mode specific styling */
+body.dark-mode .saved-websites, body.dark-mode .history-container {
+    border-radius: 22px;
+    border: none;
+    background: black;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 600px) {
+    .saved-websites, .history-container {
+        width: 90%; /* Almost full width for small screens */
+        height: auto; /* Adjust height for content */
+        max-height: 90vh; /* Max height relative to viewport */
+        padding: 10px; /* Reduce padding for small screens */
+    }
+}
+
+    /* Header styles for saved websites and history */
+    .saved-websites h4, .history-container h4 {
+        margin: 0 0 15px;
+        text-align: center;
+        font-size: 1.9em;
+        color: black; /* Darker text for better readability */
+        font-family: 'Roboto', sans-serif; /* Google font */
+    }
+    body.dark-mode {
+        #back-button, 
+        #forward-button, 
+        #reload-button {
+            color: #ffffff; /* Text color */
+            border: none;
+            background: none; /* No background */
+            font-size: 20px; /* Increase font size */
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+            margin: 0 10px; /* Spacing between buttons */
+        }
+    }
+    
+    body.dark-mode .saved-websites h4, .history-container h4 {
+        margin: 0 0 15px;
+        text-align: center;
+        font-size: 1.9em;
+        color: white; /* Darker text for better readability */
+        font-family: 'Roboto', sans-serif; /* Google font */
+    }
+    /* Styles for saved items and history items */
+        body.dark-mode .saved-item, .history-item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 24px 0;
+        color: white;
+        padding: 12px;
+        width: 70%;
+        border-radius: 80px;
+        background: black; /* Light gray background */
+        transition: background 0.3s, transform 0.3s;
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .saved-item, .history-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 27px 0;
+        padding: 9px;
+        font-size: 20px;
+        color: white;
+        border-radius: 80px;
+        background: linear-gradient(45deg, #2a4786, #00357a); /* Light gray background */
+        transition: background 0.3s, transform 0.3s;
+        position: relative;
+        box-shadow: 0 1px 3px rgba(255, 248, 248, 0.1);
+    }
+    
+    /* Hover effects for items */
+    .saved-item:hover, .history-item:hover {
+        background: linear-gradient(45deg, #0b2181, #06109c); /* Slightly darker on hover */
+        transform: translateY(-2px);
+    }
+    
+    /* Image styles for saved items */
+    .saved-item img {
+        width: 36px;
+        height: 36px;
+        margin-right: 10px;
+        border-radius: 50%; /* Circular images */
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Settings menu styles */
+   /* Styling for the settings menu */
+.settings-menu {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    margin-top: -60px;
+    background: #202020; /* White background */
+    
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10000; /* High z-index to ensure it stays on top */
+    width: 130px; /* Wider settings menu */
+}
+
+    /* Button styles in settings menu */
+    .settings-menu button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 10px;
+        text-align: left;
+        color: #ffffff;
+        transition: background 0.3s, color 0.3s;
+    }
+    
+    /* Hover effect for menu buttons */
+    .settings-menu button:hover {
+       
+        color: white; /* Blue text on hover */
+    }
+    </style>
+    
+    <script>
+        document.getElementById("new-close-button").addEventListener("click", function() {
+            document.getElementById("saved-websites-container").style.display = "none";
+        });
+    </script>
+    <div class="floating-buttons">
+        <div id="add-website-form" class="add-website-form">
+            <button id="cancel-add-button" class="close-buttonten">✖</button>
+            <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 50px;">
+                <img src="C:\Users\k153f_qqpvs8e\Pictures\Documents\Module 2/music.png" alt="Add Website" style="width: 50px; height: 50px;" />
+            </div>
+            <input type="text" id="new-website-input" placeholder="Enter website URL">
+            <button id="confirm-add-button" class="confirm-button"><i class="fas fa-add"></i> Add</button>
+    
+            <!-- Circular buttons with Font Awesome icons -->
+            <div class="circle-buttons">
+                <button class="circle-button" data-url="https://www.instagram.com">
+                    <i class="fab fa-instagram"></i>
+                </button>
+                <button class="circle-button" data-url="https://www.facebook.com">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="circle-button" data-url="https://www.youtube.com">
+                    <i class="fab fa-youtube"></i>
+                </button>
+                <button class="circle-button linkedin-button" data-url="https://www.linkedin.com">
+                    <i class="fab fa-linkedin-in"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+<script src="save.js"></script>
+<script src="save-website.js"></script>
+<script>
+// Get all circular buttons
+const circleButtons = document.querySelectorAll('.circle-button');
+const inputField = document.getElementById('new-website-input');
+
+// Add click event listener to each button
+circleButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Get the URL from the data attribute
+        const url = button.getAttribute('data-url');
+        // Set the input field's value to the URL
+        inputField.value = url;
+    });
+});
+
+</script>
+
+    <style>
+ .circle-buttons {
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Center the buttons */
+    margin-top: 20px; /* Space above the buttons */
+}
+
+.circle-button {
+    border: none; /* Remove border */
+    border-radius: 50%; /* Circular shape */
+    width: 60px; /* Fixed width */
+    height: 60px; /* Fixed height */
+    margin: 0 10px; /* Space between buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: flex; /* Flexbox for centering icon */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center icon horizontally */
+    overflow: hidden; /* Hide overflow */
+    transition: all 0.3s; /* Smooth transition */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    font-size: 24px; /* Icon size */
+    color: white; /* Icon color */
+}
+
+/* Instagram Button */
+.circle-button:nth-child(1) {
+    background-color: #C13584; /* Instagram color */
+}
+
+.circle-button:nth-child(1):hover {
+    background-color: #9b2a6e; /* Darker shade on hover */
+}
+
+/* Facebook Button */
+.circle-button:nth-child(2) {
+    background-color: #3b5998; /* Facebook color */
+}
+
+.circle-button:nth-child(2):hover {
+    background-color: #2d4373; /* Darker shade on hover */
+}
+
+/* YouTube Button */
+.circle-button:nth-child(3) {
+    background-color: #FF0000; /* YouTube color */
+}
+
+.circle-button:nth-child(3):hover {
+    background-color: #cc0000; /* Darker shade on hover */
+}
+
+/* LinkedIn Button */
+.circle-button.linkedin-button {
+    background-color: #0077b5; /* LinkedIn color */
+}
+
+.circle-button.linkedin-button:hover {
+    background-color: #005f8d; /* Darker shade on hover */
+}
+
+ .saved-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: none;
+    transition: background-color 0.2s;
+}
+
+.saved-item:hover {
+    background-color: #f9f9f9; /* Subtle hover effect */
+}
+
+.website-logo {
+        width: 32px; /* Fixed width */
+        height: 32px; /* Fixed height */
+        object-fit: contain; /* Maintain aspect ratio */
+        max-width: 100%; /* Ensure it fits within its container */
+        border-radius: 4px; /* Slight rounding for a softer look */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        display: block; /* Ensure block display */
+        image-rendering: auto; /* Default rendering */
+        image-rendering: crisp-edges; /* Improve sharpness */
+        image-rendering: pixelated; /* Prevent blurriness */
+        transition: transform 0.2s; /* Smooth hover effect */
+    }
+.settings-icon {
+    cursor: pointer; /* Change cursor to pointer for clarity */
+    margin-left: 10px; /* Space between name and icon */
+}
+
+.settings-menu {
+    display: none; /* Hide by default */
+    position: absolute; /* Position it absolutely */
+    background: #1f1e1e; /* Background color */
+
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: none; /* Shadow for depth */
+    z-index: 10; /* Ensure it's on top */
+}
+
+.settings-menu button {
+    padding: 10px 20px; /* Button padding */
+    border: none; /* No border */
+    background: transparent; /* Transparent background */
+    cursor: pointer; /* Pointer cursor for buttons */
+}
+
+
+    </style>
+    <style>
+
+    </style>
+    <script>
+        function toggleForm() {
+    const form = document.querySelector('.add-website-form');
+    form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+}
+
+    </script>
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <span class="close-settings" id="new-close-settings-button">✖</span>
+            <h4>Settings</h4>
+            <div class="settings-options">
+         
+    <script>
+        document.getElementById("new-close-settings-button").addEventListener("click", function() {
+            document.getElementById("settings-modal").style.display = "none";
+        });
+    </script>
+    
+                <button class="settings-button" id="history-button">
+                    <i class="fas fa-history"></i> History
+                </button>
+                <button class="settings-button" id="customize-button">
+                    <i class="fas fa-cog"></i> Customize
+                </button>
+                <button class="settings-button" id="theme-toggle-button">
+                    <i class="fas fa-paint-brush"></i> Theme
+                </button>
+                <button class="settings-button" id="report-button">
+                    <i class="fas fa-flag"></i> Report
+                </button>
+                <button class="settings-button" id="feedback-button">
+                    <i class="fas fa-comment-dots"></i> Send Feedback
+                </button>
+                <button class="settings-button" id="privacy-button">
+                    <i class="fas fa-shield-alt"></i> Privacy
+                </button>
+                <button class="settings-button" id="security-button">
+                    <i class="fas fa-lock"></i> Security
+                </button>
+                <button class="settings-button" id="notifications-button">
+                    <i class="fas fa-bell"></i> Notifications
+                </button>
+                <div class="settings-button" id="language-button">
+                    <i class="fas fa-language"></i> Language
+                </div>
+                <div id="language-container" style="display: none;">
+                    <span id="close-language-button" style="cursor: pointer; float: right;">✖</span>
+                    <h4>Select Language</h4>
+                    <div class="language-options" style="max-height: 200px; overflow-y: auto;">
+                        <div class="language-option">
+                            <input type="radio" id="lang-en" name="language" value="en" checked>
+                            <label for="lang-en">English</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-es" name="language" value="es">
+                            <label for="lang-es">Spanish</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-fr" name="language" value="fr">
+                            <label for="lang-fr">French</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-de" name="language" value="de">
+                            <label for="lang-de">German</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-zh" name="language" value="zh">
+                            <label for="lang-zh">Chinese</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-ja" name="language" value="ja">
+                            <label for="lang-ja">Japanese</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-ru" name="language" value="ru">
+                            <label for="lang-ru">Russian</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-ar" name="language" value="ar">
+                            <label for="lang-ar">Arabic</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-it" name="language" value="it">
+                            <label for="lang-it">Italian</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-pt" name="language" value="pt">
+                            <label for="lang-pt">Portuguese</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-nl" name="language" value="nl">
+                            <label for="lang-nl">Dutch</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-vi" name="language" value="vi">
+                            <label for="lang-vi">Vietnamese</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-th" name="language" value="th">
+                            <label for="lang-th">Thai</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-hi" name="language" value="hi">
+                            <label for="lang-hi">Hindi</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-bn" name="language" value="bn">
+                            <label for="lang-bn">Bengali</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-tl" name="language" value="tl">
+                            <label for="lang-tl">Filipino</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-ms" name="language" value="ms">
+                            <label for="lang-ms">Malay</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-cs" name="language" value="cs">
+                            <label for="lang-cs">Czech</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-da" name="language" value="da">
+                            <label for="lang-da">Danish</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-fi" name="language" value="fi">
+                            <label for="lang-fi">Finnish</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-sv" name="language" value="sv">
+                            <label for="lang-sv">Swedish</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-no" name="language" value="no">
+                            <label for="lang-no">Norwegian</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <style>
+                    #language-container {
+                        border: none;
+                        padding: 20px;
+                        background-color: black;
+                        position: fixed;
+                        color: aliceblue;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1000;
+                        
+                        width: 300px; /* Adjust width as needed */
+                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                        border-radius: 8px;
+                    }
+                
+                    #close-language-button {
+                        font-size: 18px;
+                        color: white;
+                    }
+                
+                    .language-option {
+                        margin: 10px 0;
+                    }
+                
+                    .language-options {
+                        max-height: 200px;
+                        font-size: 20px; /* Limit height for scrolling */
+                        overflow-y: auto; /* Enable vertical scrolling */
+                    }
+                    .language-radio{
+                        font-size: 33px;
+                    }
+                </style>
+                
+                <script>
+                      // Content mapping for different languages
+  const content = {
+    en: {
+        title: "Welcome to Cool Custom Search Browser!",
+        searchPlaceholder: "Search or enter URL",
+        backButton: "Go Back",
+        forwardButton: "Go Forward",
+        reloadButton: "Reload",
+        micButton: "Voice Search",
+        savedLinks: "Show Saved Links",
+        privacy: "Privacy",
+        store: "Store",
+    },
+    es: {
+        title: "¡Bienvenido al navegador de búsqueda personalizado y genial!",
+        searchPlaceholder: "Buscar o ingresar URL",
+        backButton: "Regresar",
+        forwardButton: "Avanzar",
+        reloadButton: "Recargar",
+        micButton: "Búsqueda por voz",
+        savedLinks: "Mostrar enlaces guardados",
+        privacy: "Privacidad",
+        store: "Tienda",
+    },
+    fr: {
+        title: "Bienvenue dans le navigateur de recherche personnalisé et cool !",
+        searchPlaceholder: "Rechercher ou entrer l'URL",
+        backButton: "Retourner",
+        forwardButton: "Aller de l'avant",
+        reloadButton: "Recharger",
+        micButton: "Recherche vocale",
+        savedLinks: "Afficher les liens sauvegardés",
+        privacy: "Confidentialité",
+        store: "Magasin",
+    },
+    de: {
+        title: "Willkommen im coolen benutzerdefinierten Suchbrowser!",
+        searchPlaceholder: "Suchen oder URL eingeben",
+        backButton: "Zurück",
+        forwardButton: "Vorwärts",
+        reloadButton: "Neu laden",
+        micButton: "Sprachsuche",
+        savedLinks: "Gespeicherte Links anzeigen",
+        privacy: "Datenschutz",
+        store: "Geschäft",
+    },
+    zh: {
+        title: "欢迎使用酷炫自定义搜索浏览器！",
+        searchPlaceholder: "搜索或输入网址",
+        backButton: "返回",
+        forwardButton: "前进",
+        reloadButton: "重载",
+        micButton: "语音搜索",
+        savedLinks: "显示已保存的链接",
+        privacy: "隐私",
+        store: "商店",
+    },
+    ja: {
+        title: "クールなカスタム検索ブラウザへようこそ！",
+        searchPlaceholder: "検索またはURLを入力",
+        backButton: "戻る",
+        forwardButton: "進む",
+        reloadButton: "リロード",
+        micButton: "音声検索",
+        savedLinks: "保存したリンクを表示",
+        privacy: "プライバシー",
+        store: "ストア",
+    },
+    ru: {
+        title: "Добро пожаловать в крутую поисковую браузерную систему!",
+        searchPlaceholder: "Поиск или введите URL",
+        backButton: "Назад",
+        forwardButton: "Вперед",
+        reloadButton: "Перезагрузить",
+        micButton: "Голосовой поиск",
+        savedLinks: "Показать сохраненные ссылки",
+        privacy: "Конфиденциальность",
+        store: "Магазин",
+    },
+    ar: {
+        title: "مرحبًا بك في متصفح البحث المخصص الرائع!",
+        searchPlaceholder: "ابحث أو أدخل عنوان URL",
+        backButton: "العودة",
+        forwardButton: "التقدم",
+        reloadButton: "إعادة تحميل",
+        micButton: "بحث صوتي",
+        savedLinks: "عرض الروابط المحفوظة",
+        privacy: "خصوصية",
+        store: "متجر",
+    },
+    it: {
+        title: "Benvenuto nel fantastico browser di ricerca personalizzato!",
+        searchPlaceholder: "Cerca o inserisci l'URL",
+        backButton: "Indietro",
+        forwardButton: "Avanti",
+        reloadButton: "Ricarica",
+        micButton: "Ricerca vocale",
+        savedLinks: "Mostra link salvati",
+        privacy: "Privacy",
+        store: "Negozio",
+    },
+    pt: {
+        title: "Bem-vindo ao incrível navegador de busca personalizado!",
+        searchPlaceholder: "Pesquisar ou inserir URL",
+        backButton: "Voltar",
+        forwardButton: "Avançar",
+        reloadButton: "Recarregar",
+        micButton: "Pesquisa por voz",
+        savedLinks: "Mostrar links salvos",
+        privacy: "Privacidade",
+        store: "Loja",
+    },
+    nl: {
+        title: "Welkom bij de coole aangepaste zoekbrowser!",
+        searchPlaceholder: "Zoeken of URL invoeren",
+        backButton: "Teruggaan",
+        forwardButton: "Doorgaan",
+        reloadButton: "Vernieuwen",
+        micButton: "Stemzoekfunctie",
+        savedLinks: "Toon opgeslagen links",
+        privacy: "Privacy",
+        store: "Winkel",
+    },
+    vi: {
+        title: "Chào mừng bạn đến với trình duyệt tìm kiếm tùy chỉnh tuyệt vời!",
+        searchPlaceholder: "Tìm kiếm hoặc nhập URL",
+        backButton: "Quay lại",
+        forwardButton: "Tiến tới",
+        reloadButton: "Tải lại",
+        micButton: "Tìm kiếm bằng giọng nói",
+        savedLinks: "Hiển thị liên kết đã lưu",
+        privacy: "Quyền riêng tư",
+        store: "Cửa hàng",
+    },
+    th: {
+        title: "ยินดีต้อนรับสู่เบราว์เซอร์ค้นหาที่กำหนดเองที่เจ๋ง!",
+        searchPlaceholder: "ค้นหาหรือป้อน URL",
+        backButton: "ย้อนกลับ",
+        forwardButton: "ไปข้างหน้า",
+        reloadButton: "โหลดใหม่",
+        micButton: "ค้นหาด้วยเสียง",
+        savedLinks: "แสดงลิงก์ที่บันทึกไว้",
+        privacy: "ความเป็นส่วนตัว",
+        store: "ร้านค้า",
+    },
+    hi: {
+        title: "कूल कस्टम सर्च ब्राउज़र में आपका स्वागत है!",
+        searchPlaceholder: "खोजें या URL दर्ज करें",
+        backButton: "वापस जाओ",
+        forwardButton: "आगे बढ़ें",
+        reloadButton: "पुनः लोड करें",
+        micButton: "वॉइस सर्च",
+        savedLinks: "सहेजे गए लिंक दिखाएँ",
+        privacy: "गोपनीयता",
+        store: "दुकान",
+    },
+    bn: {
+        title: "কুল কাস্টম সার্চ ব্রাউজারে স্বাগতম!",
+        searchPlaceholder: "সার্চ করুন অথবা URL প্রবেশ করান",
+        backButton: "পেছনে যান",
+        forwardButton: "অগ্রসর হন",
+        reloadButton: "পুনরায় লোড করুন",
+        micButton: "ভয়েস সার্চ",
+        savedLinks: "সংরক্ষিত লিঙ্ক দেখান",
+        privacy: "গোপনীয়তা",
+        store: "দোকান",
+    },
+    tl: {
+        title: "Maligayang pagdating sa cool na customized search browser!",
+        searchPlaceholder: "Maghanap o mag-enter ng URL",
+        backButton: "Bumalik",
+        forwardButton: "Sulong",
+        reloadButton: "I-reload",
+        micButton: "Boses na Paghahanap",
+        savedLinks: "Ipakita ang Naka-save na mga Link",
+        privacy: "Pribasiya",
+        store: "Tindahan",
+    },
+    ms: {
+        title: "Selamat datang di pelayar carian tersuai yang hebat!",
+        searchPlaceholder: "Cari atau masukkan URL",
+        backButton: "Kembali",
+        forwardButton: "Ke Hadapan",
+        reloadButton: "Muat Semula",
+        micButton: "Carian Suara",
+        savedLinks: "Tunjukkan Pautan Simpanan",
+        privacy: "Privasi",
+        store: "Kedai",
+    },
+    cs: {
+        title: "Vítejte v cool přizpůsobeném vyhledávacím prohlížeči!",
+        searchPlaceholder: "Hledat nebo zadat URL",
+        backButton: "Vrátit se",
+        forwardButton: "Pokračovat",
+        reloadButton: "Obnovit",
+        micButton: "Hlasové vyhledávání",
+        savedLinks: "Zobrazit uložené odkazy",
+        privacy: "Ochrana soukromí",
+        store: "Obchod",
+    },
+    da: {
+        title: "Velkommen til den fede tilpassede søgebrowser!",
+        searchPlaceholder: "Søg eller indtast URL",
+        backButton: "Gå tilbage",
+        forwardButton: "Gå videre",
+        reloadButton: "Genindlæs",
+        micButton: "Stemmesøgning",
+        savedLinks: "Vis gemte links",
+        privacy: "Privatliv",
+        store: "Butik",
+    },
+    fi: {
+        title: "Tervetuloa hienoon mukautettuun hakuselaimeen!",
+        searchPlaceholder: "Hae tai syötä URL",
+        backButton: "Palaa takaisin",
+        forwardButton: "Eteenpäin",
+        reloadButton: "Lataa uudelleen",
+        micButton: "Äänihaku",
+        savedLinks: "Näytä tallennetut linkit",
+        privacy: "Yksityisyys",
+        store: "Kauppa",
+    },
+    sv: {
+        title: "Välkommen till den coola anpassade sökwebbläsaren!",
+        searchPlaceholder: "Sök eller ange URL",
+        backButton: "Gå tillbaka",
+        forwardButton: "Gå framåt",
+        reloadButton: "Ladda om",
+        micButton: "Röst Sök",
+        savedLinks: "Visa sparade länkar",
+        privacy: "Sekretess",
+        store: "Butik",
+    },
+    no: {
+        title: "Velkommen til den kule tilpassede søkebrowseren!",
+        searchPlaceholder: "Søk eller skriv inn URL",
+        backButton: "Gå tilbake",
+        forwardButton: "Gå videre",
+        reloadButton: "Last inn på nytt",
+        micButton: "Talestyrt søk",
+        savedLinks: "Vis lagrede lenker",
+        privacy: "Personvern",
+        store: "Butikk",
+    },
+};
+
+// Initialize language container and buttons
+const languageButton = document.getElementById('language-button');
+const languageContainer = document.getElementById('language-container');
+const closeLanguageButton = document.getElementById('close-language-button');
+
+// Toggle language container visibility
+languageButton.addEventListener('click', () => {
+    languageContainer.style.display = languageContainer.style.display === 'none' ? 'block' : 'none';
+});
+
+// Change content based on selected language
+document.querySelectorAll('input[name="language"]').forEach(input => {
+    input.addEventListener('change', (event) => {
+        const selectedLanguage = event.target.value;
+
+        // Update page title
+        document.title = content[selectedLanguage].title;
+
+        // Update other elements (assumed to exist)
+        document.querySelector('#search-input').placeholder = content[selectedLanguage].searchPlaceholder;
+        document.querySelector('#back-button').setAttribute('aria-label', content[selectedLanguage].backButton);
+        document.querySelector('#forward-button').setAttribute('aria-label', content[selectedLanguage].forwardButton);
+        document.querySelector('#reload-button').setAttribute('aria-label', content[selectedLanguage].reloadButton);
+        document.querySelector('#mic-button').setAttribute('aria-label', content[selectedLanguage].micButton);
+        document.querySelector('#star-button').setAttribute('aria-label', content[selectedLanguage].savedLinks);
+        document.querySelector('#security').setAttribute('aria-label', content[selectedLanguage].privacy);
+        document.querySelector('#store').setAttribute('aria-label', content[selectedLanguage].store);
+    });
+});
+
+// Close language selection
+closeLanguageButton.addEventListener('click', () => {
+    languageContainer.style.display = 'none';
+});
+
+// Add event listeners for existing buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const backButton = document.getElementById('back-button');
+    const forwardButton = document.getElementById('forward-button');
+    const reloadButton = document.getElementById('reload-button');
+    const resultFrame = document.getElementById('result-frame');
+
+    backButton.addEventListener('click', function() {
+        resultFrame.contentWindow.history.back();
+    });
+
+    forwardButton.addEventListener('click', function() {
+        resultFrame.contentWindow.history.forward();
+    });
+
+    reloadButton.addEventListener('click', function() {
+        resultFrame.contentWindow.location.reload();
+    });
+
+    // Load data from localStorage if needed
+    loadFromLocalStorage();
+});
+                    </script>
+                <div id="language-container" style="display: none;">
+                    <span id="close-language-button" style="cursor: pointer; float: right;">✖</span>
+                    <h4>Select Language</h4>
+                    <div class="language-options" style="max-height: 200px; overflow-y: auto;">
+                        <div class="language-option">
+                            <input type="radio" id="lang-en" name="language" value="en" checked>
+                            <label for="lang-en">English</label>
+                        </div>
+                        <div class="language-option">
+                            <input type="radio" id="lang-es" name="language" value="es">
+                            <label for="lang-es">Spanish</label>
+                        </div>
+                        <!-- Add more languages as needed -->
+                    </div>
+                </div>
+                <button class="settings-button" id="help-button">
+                    <i class="fas fa-question-circle"></i> Help
+                </button>
+                <button class="settings-button" id="logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="search.js"></script>
+    <script src="engine.js"></script>
+    <script src="server.js"></script>
+    
+    <footer class="footer">
+        <div class="footer-buttons">
+            <button id="home-button" title="Home"><i class="fas fa-home"></i></button>
+            <button id="about-button" title="About"><i class="fas fa-search"></i></button>
+            <button id="notification-button" title="Shop" style="border: none; background: none; cursor: pointer; position: relative;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACz0lEQVR4nO1ZO2gVURBd/+CPCGqtlZVoMGCw8FMJWmgtiOAnVaxS2AgmWCgIlopC0EIREhVtFDX4FPRZ+CDJ2zvvxVhpEwQhkuzctfLI6EbfWze79ybvs+A9MM2y5849M3dmh7ue5+Dg4BAHhTipGEWlUWqqMYriy2sGlMY50kBLjXG5YQIALCGNqy0XoX+b0rgGYOmiRBSA5cS43S4RNCeGca8ErFiQiBKwWmk8abcI+itmpAqssxZSZnQpRk+erMzoWlBWHPIACnFKWq2h9dVyFaPXmMvoreNq9JlyZY+ZQpSGsijAsC4IGlMWBTwVC0Jo0ZLVfySEUVzEZj4YcxnVWBC+WHDfZAohjRsWGXke4w5bBGEoFoQXFhm5ninE19hjseCxWm4lwGFjIQEOxYJw3DB4PyqM7kwhUXQGDRYcSZqBlMZDgw09iPMALCPGSwPuTc8Uk8AqYtxKWezp6DQ6krhjwBrSuJ/CHZZ3krij0+ggxrOU4A0qYKVni4rGvmhoHI+62RAxjshEXCN6vUR4YgYba7l+gIPEuKs0fDFi3JFndQGbwSbhyhp10zbjqPiKfI5HQd3rNQsKWPunSBlv58tSEsrfsGGuQ0rTkLW8doAYu4nxMdYWP/kh9mdx/RAHiPE5dmwmZc2Gb1QxrsgYUZ3Fdom0pN8PsENpnFCM19I9Us5ysRLgNAXoFO6vsx+gUwU4ozTepXUkxXglPsSX+BSu7EExzsqerIUQo2DxTWiNMQpOCLU7C9plJLNG3kt3qTJ2pRlpnJ+noC+m8SqMbrnban5GGAMm/LFZbE7iT4TYauB7oBVC+k340Vf7H341xBYD3/1OSBwuIxHc0fJcjbS4Rr5jWxaXGJdy37Wi6TbtAu6C0viaeyH5mbXYCYHLiHZHy5Obv8d5qxGl8ci62FWAnVLwCf/Ae4yvexr4750YBbmQsBbi4ODgCX4CAy5t6FiSQ8AAAAAASUVORK5CYII=" alt="shop" style="width: 28px; height: 28px; filter: invert(48%) sepia(89%) saturate(167%) hue-rotate(205deg) brightness(96%) contrast(95%);">
+            </button>
+         
+        </head>
+        <body>
+        
+        <button id="tab-button" title="tab">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAoklEQVR4nO2VQQrCMBBFZ6Ezpbh14W0ENxY9h9d0bRI9hPUeTyoIblITTUW0A38X/oOfP4zI34wGNua5VB76ZJ5WHU02wDztM/MHyDkbUCWa3/W9AA1s+zQCeDmiWM+l1B/Eei6lALG6zU7Miyxa7HHt2N0idDQpkM7cDqyTe26epQSm2YuTCtAOcmRVBxayZzIIQMdN/UhENvRB0Xd7Lr86VzwfkUSKUkqFAAAAAElFTkSuQmCC" 
+                 alt="show-non-hidden-views" style="width: 28px; height: 28px; filter: invert(48%) sepia(89%) saturate(167%) hue-rotate(205deg) brightness(96%) contrast(95%);">
+        </button>
+        
+        <script>
+        const tabButton = document.getElementById('tab-button');
+        const tabsContainer = document.getElementById('tabs-container');
+        const closeTabButton = document.getElementById('close-tab-button');
+        const placeholder = document.getElementById('placeholder');
+        const tabContent = document.getElementById('tab-content');
+    
+        tabButton.addEventListener('click', () => {
+            tabsContainer.style.display = tabsContainer.style.display === 'block' ? 'none' : 'block';
+    
+            // Check if tab content is visible and adjust the placeholder accordingly
+            if (tabContent.style.display === 'block') {
+                placeholder.style.display = 'none'; // Hide placeholder when content is shown
+            } else {
+                placeholder.style.display = 'block'; // Show placeholder if no content
+            }
+        });
+    
+        closeTabButton.addEventListener('click', () => {
+            tabsContainer.style.display = 'none';
+            placeholder.style.display = 'block'; // Show placeholder when tabs are closed
+            tabContent.style.display = 'none'; // Ensure content is hidden
+        });
+    
+        function loadTabContent() {
+            tabContent.style.display = 'block'; // Show tab content
+            placeholder.style.display = 'none';  // Hide placeholder
+        }
+    
+        // Simulate loading a tab when the container is shown
+        tabButton.addEventListener('click', () => {
+            if (tabsContainer.style.display === 'block') {
+                loadTabContent(); // Load content when tab is opened
+            }
+        });
+    </script>
+            <button id="notification-button" title="More" style="border: none; background: none; cursor: pointer; position: relative;">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA80lEQVR4nO2WTQ6CMBSEu9I76A39OybiQvEqBrfDmJJqjL5KcQFvMV/ydswktKV8IQgh/oLkkuQBQA3gnqYmuSO58Jj9guQawLXrOloDoInPeMqaK/Kr7K308rlCc2VN4rYOlT2H5NZD1gTAqbQQwNFD1gRAO6Kw9ZA1GVl485A1iVfdiMLKQ9aE5L60kOTGQ9YkXYNNwaqcM1fo5Nks6cfUDJStPGWzxLeOWhDPY/wQ01RxWws0Y5asEFNCaTyl8ZDGG0jjgzS+RxqfQxofpPEvKI0XYnoojac0HtJ4A2l8kMb3SONzSOODNP4FpfFCiDDAA6x3wBHSuOKUAAAAAElFTkSuQmCC" alt="circled-menu" style="width: 28px; height: 28px; filter: invert(48%) sepia(89%) saturate(167%) hue-rotate(205deg) brightness(96%) contrast(95%);">
+            </button>
+            
+            
+            
+           
+               
+                
+            </div>
+        </div>
+        <style>
+     #home-button {
+    background-color: none; /* Red */
+    color: rgb(59, 223, 223);
+}
+
+#about-button {
+    background-color: none; /* Green */
+    color: rgb(55, 215, 255);
+}
+
+#services-button {
+    background-color: none; /* Blue */
+    color: rgb(27, 141, 156);
+}
+
+#contact-button {
+    background-color: none; /* Yellow */
+    color: rgb(255, 139, 61);
+}
+
+#notification-button {
+    border: none;
+    background: none; /* No background for notification button */
+    cursor: pointer;
+}
+
+        </style>
+    
+        <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const notificationButton = document.getElementById('notification-button');
+    const notificationIndicator = document.getElementById('notification-indicator');
+
+    // Function to show the notification
+    const showNotification = () => {
+        notificationIndicator.style.display = 'inline'; // Show the notification
+        setTimeout(hideNotification, 4000); // Attempt to hide it after 4 seconds
+    };
+
+    // Function to hide the notification
+    const hideNotification = () => {
+        if (notificationIndicator.style.display === 'inline') {
+            notificationIndicator.style.display = 'none'; // Hide it
+        }
+    };
+
+    // Event listener for the button
+    notificationButton.addEventListener('click', showNotification);
+
+    // Fallback in case the notification does not hide
+    const checkNotification = setInterval(() => {
+        if (notificationIndicator.style.display === 'inline') {
+            console.warn('Notification is still visible. Hiding it now.');
+            hideNotification(); // Force hide if it's still visible
+        }
+    }, 1000); // Check every second
+
+    // Override hideNotification to clear the interval
+    const originalHideNotification = hideNotification;
+    hideNotification = () => {
+        clearInterval(checkNotification); // Clear the check when hiding
+        originalHideNotification(); // Call the original hide function
+    };
+});
+
+
+        </script>
+        
+        
+
+
+
+
+
+        </script>
+        <script>
+            document.getElementById("home-button").addEventListener("click", function() {
+                window.location.href = "indextwo.html"; // Change this to your home page URL
+            });
+        </script>
+    </footer>
+    
+        <style>
+            /* Ring animation */
+            @keyframes ring {
+                0% { transform: rotate(0deg); }
+                25% { transform: rotate(10deg); }
+                50% { transform: rotate(-10deg); }
+                75% { transform: rotate(5deg); }
+                100% { transform: rotate(0deg); }
+            }
+            .ring {
+                animation: ring 1s ease forwards;
+            }
+        </style>
+    </footer>
+    
+    <script>
+        let lastScrollTop = 0; // Track last scroll position
+        const footer = document.querySelector('.footer');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scroll down
+                footer.style.transform = 'translateY(100%)'; // Hide footer
+            } else {
+                // Scroll up
+                footer.style.transform = 'translateY(0)'; // Show footer
+            }
+            lastScrollTop = scrollTop; // Update last scroll position
+        });
+    </script>
+    <script>
+        // About button event listener
+        document.getElementById('about-button').addEventListener('click', function() {
+            // Scroll to the top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+            // Focus on the search input
+            document.getElementById('search-input').focus();
+        });
+    </script>
+        
+        <script>
+            function simulateLoading() {
+             const progressBar = document.getElementById('progressBar');
+             const content = document.getElementById('content');
+             const loaderContainer = document.getElementById('loaderContainer');
+             const frame = document.getElementById('result-frame');
+         
+             // Reset progress bar
+             progressBar.style.transition = 'none'; // Disable transition
+             progressBar.style.width = '0%'; // Reset width
+             loaderContainer.style.display = 'block'; // Show loader
+         
+             // Start loading the iframe with a very short delay
+             setTimeout(() => {
+                 frame.onload = function() {
+                     // Display content once the iframe has loaded
+                     content.style.display = 'block';
+                     progressBar.style.transition = 'width 0.2s ease'; // Smooth transition for width
+                     progressBar.style.width = '100%'; // Fill the bar to 100%
+         
+                     // Smoothly fade out the loader
+                     loaderContainer.style.opacity = '0'; // Start fading out
+                     setTimeout(() => {
+                         loaderContainer.style.display = 'none'; // Hide after fade out
+                     }, 500); // Match this timeout with the CSS transition duration
+                 };
+         
+                 // Set the iframe's source to trigger loading
+                 frame.src = frame.src; // Reload iframe to ensure onload is triggered
+         
+                 // Simulate rapid progress updates
+                 let progress = 0;
+                 const updateProgress = () => {
+                     if (progress < 98) {
+                         progress += Math.random() * 25; // Increase progress quickly
+                         progressBar.style.width = `${Math.min(progress, 98)}%`; // Update progress bar
+                         requestAnimationFrame(updateProgress); // Schedule next update
+                     }
+                 };
+         
+                 // Start the simulated progress
+                 updateProgress();
+         
+             }, 1); // Very short delay before triggering iframe loading
+         }
+         
+         // Start loading simulation when the page loads
+         window.onload = simulateLoading;
+         
+                 </script>
+    <script>
+        // main.js
+
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
+const searchEngine = document.getElementById('search-engine');
+const resultFrame = document.getElementById('result-frame');
+const settingsModal = document.getElementById('settings-modal');
+const historyContainer = document.getElementById('history-container');
+const historyList = document.getElementById('history-list');
+const closeHistoryButton = document.getElementById('close-history-button');
+const starIcon = document.getElementById('star-icon');
+let history = [];
+let savedWebsites = [];
+
+// Load data from localStorage
+function loadFromLocalStorage() {
+    history = JSON.parse(localStorage.getItem('history')) || [];
+    savedWebsites = JSON.parse(localStorage.getItem('savedWebsites')) || [];
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+        document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+    }
+
+    updateHistory();
+    updateSavedWebsites();
+}
+
+// Save data to localStorage
+function saveToLocalStorage() {
+    localStorage.setItem('history', JSON.stringify(history));
+    localStorage.setItem('savedWebsites', JSON.stringify(savedWebsites));
+}
+
+// Check internet connection
+function checkConnection() {
+    if (!navigator.onLine) {
+        resultFrame.src = 'game-one.html'; // Load game-one.html in the iframe
+        return false;
+    }
+    return true;
+}
+
+// Initial connection check on page load
+if (!checkConnection()) {
+    // No action needed, game-one.html will load
+}
+// Function to perform the search or redirect
+function performSearch() {
+    if (!checkConnection()) return; // Only proceed if connected
+
+    const query = searchInput.value.trim();
+    
+    // Regular expression for validating URLs
+    const urlPattern = /^(https?:\/\/)?(www\.)?[a-z0-9-]+\.[a-z]{2,}(\/[^\s]*)?$/i;
+
+    if (urlPattern.test(query)) {
+        // If input is a valid URL, send a request to the server
+        const fullUrl = query.startsWith('http') ? query : 'https://' + query;
+
+        fetch(`/fetch?url=${encodeURIComponent(fullUrl)}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                // Load the data into the iframe
+                resultFrame.srcdoc = data;
+
+                // Inject JavaScript to intercept links
+                resultFrame.onload = function() {
+                    const script = document.createElement('script');
+                    script.innerHTML = `
+                        window.onload = function() {
+                            // Ensure all links open inside the iframe
+                            const links = document.querySelectorAll('a');
+                            links.forEach(link => {
+                                link.addEventListener('click', function(event) {
+                                    // Prevent default behavior (which opens links outside the iframe)
+                                    event.preventDefault();
+
+                                    // Get the actual href (URL) of the link
+                                    let url = link.getAttribute('href');
+
+                                    // If it's a redirect or tracking link, extract the real URL
+                                    const redirectRegex = /u=a1aHR0cHM6Ly93d3cueW91dHViZS5jb20\/(.+)/;
+                                    const match = url.match(redirectRegex);
+
+                                    if (match) {
+                                        url = decodeURIComponent(match[1]); // Extract and decode the actual URL
+                                    }
+
+                                    // Set the input field to the clicked link URL
+                                    window.top.document.getElementById('search-input').value = url;
+
+                                    // Perform the search with the new URL
+                                    window.top.performSearch();
+                                });
+                            });
+
+                            // Handle form submissions to ensure they also happen inside the iframe
+                            const forms = document.querySelectorAll('form');
+                            forms.forEach(form => {
+                                form.addEventListener('submit', function(event) {
+                                    event.preventDefault(); // Prevent form submission
+                                    const action = form.getAttribute('action');
+                                    const method = form.getAttribute('method') || 'GET';
+                                    const data = new FormData(form);
+
+                                    // Submit form data via fetch and update the iframe with the response
+                                    fetch(action, {
+                                        method: method,
+                                        body: data,
+                                    })
+                                    .then(response => response.text())
+                                    .then(responseData => {
+                                        // Load the response into the iframe
+                                        window.top.document.querySelector('iframe').srcdoc = responseData;
+                                    })
+                                    .catch(err => console.error('Error submitting form:', err));
+                                });
+                            });
+                        };
+                    `;
+                    resultFrame.contentWindow.document.body.appendChild(script);
+                };
+            })
+            .catch(error => {
+                console.error('Error fetching URL:', error);
+            });
+    } else {
+        // If input is not a valid URL, perform a search
+        if (query) {
+            const engine = searchEngine.value;
+            const url = `${engine}${encodeURIComponent(query)}`;
+            history.push({ url, date: new Date().toLocaleString() });
+            saveToLocalStorage(); // Save history
+            addTab(url);
+            resultFrame.src = url;
+            searchInput.value = '';
+            updateStarButton(url);
+        }
+    }
+}
+
+// Search button event listener
+searchButton.addEventListener('click', performSearch);
+
+// Add event listener for the Enter key in the search input
+searchInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        performSearch();
+    }
+});
+
+// Function to add a new tab
+function addTab(url) {
+    const tab = document.createElement('div');
+    tab.className = 'tab';
+
+    // Create a small iframe for the tab
+    const miniIframe = document.createElement('iframe');
+    miniIframe.src = url; // Set the source to the same URL
+    miniIframe.style.width = '320px'; // Set a fixed width for the mini iframe
+    miniIframe.style.height = '340px'; // Set a fixed height for the mini iframe
+    miniIframe.style.border = 'none'; // Remove border
+    miniIframe.style.transform = 'scale(0.8)'; // Scale down
+    miniIframe.style.transformOrigin = '0 0'; // Set origin for scaling
+    miniIframe.style.pointerEvents = 'none'; // Make it non-interactive
+
+    // Create a remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-btn';
+    removeBtn.textContent = 'X';
+    removeBtn.onclick = (e) => {
+        e.stopPropagation(); // Prevent triggering the tab click
+        tab.remove(); // Remove the tab
+    };
+
+    // Set up the tab content and functionality
+    tab.appendChild(miniIframe);
+    tab.appendChild(removeBtn);
+
+    // Set up tab click behavior
+    tab.onclick = () => {
+        resultFrame.src = url; // Load the URL in the main iframe
+        resultFrame.style.display = 'block'; // Show the main iframe
+
+        // Trigger the close-tab-button to hide the tabs container
+        const closeButton = document.getElementById('close-tab-button');
+        if (closeButton) {
+            closeButton.click(); // Simulate clicking the close button
+        }
+    };
+
+    // Prepend the tab to the tabs container to ensure it's at the top
+    document.getElementById('tabs').prepend(tab);
+
+    tab.click(); // Load the first tab immediately
+}
+
+
+// History button event listener
+document.getElementById('history-button').addEventListener('click', () => {
+    historyContainer.style.display = 'block';
+    updateHistory();
+});
+
+// Clear history button
+document.getElementById('clear-history-button').addEventListener('click', () => {
+    history = [];
+    saveToLocalStorage(); // Save cleared history
+    updateHistory();
+});
+
+// Open the settings modal when settings button is clicked
+document.getElementById('settings-button').addEventListener('click', () => {
+    settingsModal.style.display = 'flex';
+});
+
+// Save website button
+document.getElementById('star-button').addEventListener('click', () => {
+    const currentUrl = resultFrame.src;
+    const faviconUrl = `https://www.google.com/s2/favicons?domain=${new URL(currentUrl).hostname}`;
+    const websiteName = new URL(currentUrl).hostname;
+
+    if (!savedWebsites.some(website => website.url === currentUrl)) {
+        savedWebsites.push({ url: currentUrl, name: websiteName, logo: faviconUrl });
+        saveToLocalStorage(); // Save updated websites
+        updateSavedWebsites();
+        updateStarButton(currentUrl);
+    }
+    
+    savedWebsitesContainer.style.display = 'block';
+});
+
+// Update history display
+function updateHistory() {
+    historyList.innerHTML = '';
+    history.forEach(item => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        historyItem.innerHTML = `<span>${item.url}</span><span>${item.date}</span>`;
+        historyList.appendChild(historyItem);
+    });
+}
+
+// Share website function
+function shareWebsite(url) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Check out this website!',
+            url: url
+        }).then(() => {
+            console.log('Share successful');
+        }).catch(err => {
+            console.error('Share failed', err);
+        });
+    } else {
+        alert(`Copy this link: ${url}`);
+    }
+}
+
+// Close settings modal
+function closeSettings() {
+    settingsModal.style.display = 'none';
+}
+
+// Add event listeners to all buttons in the settings modal
+const settingsButtons = settingsModal.querySelectorAll('button');
+settingsButtons.forEach(button => {
+    button.addEventListener('click', closeSettings);
+});
+
+const themeToggleButton = document.getElementById('theme-toggle-button');
+
+// Function to apply the theme
+function applyTheme(theme) {
+    document.body.classList.toggle('dark-mode', theme === 'dark');
+    document.body.classList.toggle('light-mode', theme === 'light');
+}
+
+// Function to save theme preference to localStorage
+function saveToLocalStorage(theme) {
+    localStorage.setItem('theme', theme);
+}
+
+// Check for saved theme preference in localStorage
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+    applyTheme(savedTheme);
+} else {
+    // Check for user's device or browser theme preference
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDarkScheme ? 'dark' : 'light');
+}
+
+// Toggle theme on button click
+themeToggleButton.addEventListener('click', () => {
+    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+    saveToLocalStorage(newTheme);
+});
+
+
+// Load data on script initialization
+loadFromLocalStorage();
+
+// Check for connection on window offline event
+window.addEventListener('offline', () => {
+    resultFrame.src = 'game-one.html'; // Load game-one.html in the iframe when offline
+});
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const backButton = document.getElementById('back-button');
+    const forwardButton = document.getElementById('forward-button');
+    const reloadButton = document.getElementById('reload-button');
+    const resultFrame = document.getElementById('result-frame');
+
+    // Create a history stack
+    const historyStack = [];
+    let currentIndex = -1;
+
+    function updateFrame(url) {
+        // Update the iframe and manage history
+        if (currentIndex === -1 || historyStack[currentIndex] !== url) {
+            historyStack.splice(currentIndex + 1); // Remove forward history
+            historyStack.push(url);
+            currentIndex++;
+        }
+        resultFrame.src = url;
+
+        // Update button states
+        updateButtonStates();
+    }
+
+    function updateButtonStates() {
+        backButton.disabled = currentIndex <= 0; // Disable back if at the start
+        forwardButton.disabled = currentIndex >= historyStack.length - 1; // Disable forward if at the end
+    }
+
+    backButton.addEventListener('click', function() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            resultFrame.src = historyStack[currentIndex];
+            updateButtonStates();
+        }
+    });
+
+    forwardButton.addEventListener('click', function() {
+        if (currentIndex < historyStack.length - 1) {
+            currentIndex++;
+            resultFrame.src = historyStack[currentIndex];
+            updateButtonStates();
+        }
+    });
+
+    reloadButton.addEventListener('click', function() {
+        if (currentIndex >= 0) {
+            // Reload the current URL
+            resultFrame.src = resultFrame.src; // This refreshes the current page
+        }
+    });
+
+    // Example: Load an initial URL
+    updateFrame("https://www.bing.com/search?q=walmart");
+
+    // Scroll event listener for the iframe
+    resultFrame.addEventListener('load', function() {
+        const iframeDocument = resultFrame.contentDocument || resultFrame.contentWindow.document;
+        
+        // Set an event listener on the iframe's window to detect scroll
+        iframeDocument.defaultView.addEventListener('scroll', function() {
+            const scrollTop = iframeDocument.documentElement.scrollTop || iframeDocument.body.scrollTop;
+
+            // Check if at the top and trying to scroll up
+            if (scrollTop === 0) {
+                // Reload the iframe content if the user is trying to scroll up
+                resultFrame.src = resultFrame.src; // Reload current page
+            }
+        });
+    });
+});
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const micButton = document.getElementById('mic-button');
+    const searchInput = document.getElementById('search-input');
+
+    micButton.addEventListener('click', () => {
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                micButton.classList.add('active');
+                console.log('Voice recognition started. Speak now.');
+            };
+
+            recognition.onresult = (event) => {
+                const spokenQuery = event.results[0][0].transcript;
+                searchInput.value = spokenQuery;
+                console.log('Searching for:', spokenQuery);
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Error occurred in recognition: ', event.error);
+            };
+
+            recognition.onend = () => {
+                micButton.classList.remove('active');
+                console.log('Voice recognition ended.');
+                triggerSearch(searchInput.value);
+            };
+
+            recognition.start();
+        } else {
+            console.log('Speech recognition not supported in this browser.');
+        }
+    });
+
+    function triggerSearch(query) {
+        console.log('Initiating search for:', query);
+        // Add search logic here
+    }
+});
+    </script>
+    <script>
+        const settingsButton = document.getElementById('settings-button');
+const settingsContainer = document.getElementById('settings-container');
+const overlay = document.getElementById('overlay');
+const closeButton = document.getElementById('close-button');
+
+settingsButton.onclick = () => {
+    settingsContainer.style.display = 'block';
+    overlay.style.display = 'block';
+};
+
+closeButton.onclick = () => {
+    settingsContainer.style.display = 'none';
+    overlay.style.display = 'none';
+};
+
+overlay.onclick = () => {
+    settingsContainer.style.display = 'none';
+    overlay.style.display = 'none';
+};
+    </script>
+    <script>
+        const addWebsiteButton = document.getElementById('add-website-button');
+const addWebsiteForm = document.getElementById('add-website-form');
+const confirmAddButton = document.getElementById('confirm-add-button');
+const cancelAddButton = document.getElementById('cancel-add-button');
+const newWebsiteInput = document.getElementById('new-website-input');
+
+// Show the input form
+addWebsiteButton.addEventListener('click', () => {
+    addWebsiteForm.classList.toggle('active'); // Toggle visibility
+    newWebsiteInput.focus(); // Focus on input when form opens
+});
+
+// Cancel adding a website
+cancelAddButton.addEventListener('click', () => {
+    addWebsiteForm.classList.remove('active'); // Hide form
+    newWebsiteInput.value = '';
+});
+
+// Function to get the favicon URL
+function getFaviconUrl(url) {
+    const hostname = new URL(url).hostname;
+    return `https://www.google.com/s2/favicons?domain=${hostname}&size=64`; // Adjust the size as needed
+}
+
+// Confirm adding a new website
+confirmAddButton.addEventListener('click', () => {
+    const input = newWebsiteInput.value.trim();
+    
+    if (input) {
+        // Format the URL
+        let url;
+        if (input.startsWith('http://') || input.startsWith('https://')) {
+            url = input;
+        } else {
+            url = 'http://' + input; // Default to http if no protocol is provided
+        }
+
+        // Save the website
+        const name = input.replace('www.', '').replace('http://', '').replace('https://', ''); // Clean up the name
+
+        try {
+            const validUrl = new URL(url); // Validate the URL
+
+            savedWebsites.push({ 
+                url: validUrl.href, 
+                name, 
+                logo: getFaviconUrl(validUrl.href) // Use the function to get favicon
+            });
+            saveToLocalStorage(); // Save updated websites
+            updateSavedWebsites();
+            
+            // Clear input field and hide the form
+            newWebsiteInput.value = '';
+            addWebsiteForm.classList.remove('active');
+        } catch (error) {
+            alert('Please enter a valid website URL.');
+        }
+    } else {
+        alert('Please enter a website URL.');
+    }
+});
+    </script>
+    <script>
+        function toggleElements() {
+    const buttons = document.querySelectorAll('.star-button, .store, .Security, .Notifications');
+    const searchEngine = document.getElementById('search-engine');
+    const shouldHide = window.innerWidth <= 1200; // Set your desired width here
+
+    buttons.forEach(button => {
+        button.style.display = shouldHide ? 'none' : 'inline-block';
+    });
+
+    searchEngine.style.display = shouldHide ? 'none' : 'inline-block';
+}
+
+window.addEventListener('resize', toggleElements);
+window.addEventListener('load', toggleElements);
+    </script>
+    <script>
+        const savedWebsitesList = document.getElementById('saved-websites-list');
+const savedWebsitesContainer = document.getElementById('saved-websites-container');
+const closeSavedButton = document.getElementById('close-saved-button');
+const closeSettingsButton = document.getElementById('close-settings-button');
+
+// Close buttons for modals
+closeSettingsButton.addEventListener('click', closeSettings);
+closeSavedButton.addEventListener('click', () => {
+    savedWebsitesContainer.style.display = 'none';
+});
+
+// Update saved websites display function
+function updateSavedWebsites() {
+    savedWebsitesList.innerHTML = ''; // Clear current list
+
+    savedWebsites.forEach(website => {
+        const savedItem = document.createElement('div');
+        savedItem.className = 'saved-item';
+
+        const logoSrc = website.logo || 'path/to/default/logo.png'; // Fallback logo
+
+        savedItem.innerHTML = `
+            <img src="${logoSrc}" alt="${website.name}" class="website-logo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+            <img src="path/to/default/logo.png" alt="Default Logo" class="website-logo" style="display:none;" />
+            <span>${website.name}</span>
+            <i class="fas fa-cog settings-icon"></i>
+            <div class="settings-menu">
+                <button class="remove-button"><i class="fas fa-trash"></i></button>
+                <button class="share-button" onclick="shareWebsite('${website.url}')"><i class="fas fa-share"></i> Share</button>
+            </div>
+        `;
+
+        // Set up event listeners for the saved item
+        setupItemListeners(savedItem, website);
+
+        savedWebsitesList.appendChild(savedItem);
+    });
+}
+
+// Set up event listeners for a saved item
+function setupItemListeners(savedItem, website) {
+    const settingsIcon = savedItem.querySelector('.settings-icon');
+    const settingsMenu = savedItem.querySelector('.settings-menu');
+
+    settingsIcon.addEventListener('click', () => {
+        settingsMenu.style.display = settingsMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    savedItem.querySelector('.remove-button').addEventListener('click', () => {
+        if (confirm(`Remove ${website.name} from saved websites?`)) {
+            savedWebsites = savedWebsites.filter(w => w.url !== website.url);
+            saveToLocalStorage(); // Save updated websites
+            updateSavedWebsites();
+            updateStarButton(resultFrame.src);
+        }
+    });
+}
+
+    </script>
+    
+ 
+</body>
+</html>

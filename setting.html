@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="tt.png" type="image/x-icon">
+  <title>Settings</title>
+  <link rel="stylesheet" href="settings.css">
+  <style>
+    
+     .sign-in-button {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      padding: 10px 20px;
+      background-color: white;
+      color: black;
+      font-weight: 600;
+      border: none;
+      border-radius: 500px;
+      cursor: pointer;
+    }
+    .sign-in-button:hover { background-color: #d5d7da; transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <button class="sign-in-button" onclick="window.location.href='sign in.html'">Sign In</button>
+
+  <div class="menu-container">
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <div id="sidebar" class="sidebar">
+      <input type="text" id="search" class="search-bar" placeholder="search.." oninput="searchSettings()">
+      <ul>
+        <li><a href="#" onclick="loadSection('general')">General</a></li>
+        <li><a href="#" onclick="loadSection('history')">History</a></li>
+        <li><a href="#" onclick="loadSection('security')">Security</a></li>
+        <li><a href="#" onclick="loadSection('help')">Help</a></li>
+        <li><a href="#" onclick="loadSection('terms')">Terms & Conditions</a></li>
+        <li><a href="#" onclick="loadSection('storage')">Storage</a></li>
+        <li><a href="#" onclick="loadSection('performance')">Performance</a></li>
+      </ul>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
+  </div>
+
+  <div id="content" class="content">
+    <h1>
+      <img src="C:\Users\k_qqpvs8e\Pictures\Documents\Module 2/tt.png" alt="Logo" style="vertical-align: middle; height: 40px; border-radius: 50%;">
+      Settings
+    </h1>
+    <div id="dynamic-content"></div>
+  </div>
+
+  <!-- Add the sound URL here -->
+  <audio id="switch-sound" src="C:\Users\k_qqpvs8e\Pictures\Documents\Module 2/switch.mp3" preload="auto"></audio> <!-- Replace this URL with your own sound URL -->
+  
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+      const content = document.getElementById('content');
+  
+      if (sidebar.style.left === '0px') {
+        sidebar.style.left = '-100%';
+        content.style.marginLeft = '0';
+        overlay.classList.remove('active');
+      } else {
+        sidebar.style.left = '0';
+        content.style.marginLeft = '250px'; 
+        overlay.classList.add('active');
+      }
+    }
+
+    function loadSection(section) {
+      let contentHTML = '';
+      switch (section) {
+        case 'general':
+          contentHTML = `
+          <section class="settings-section" id="general">
+            <h2>General Settings</h2>
+            <div class="setting-item">
+              <label for="dark-mode">Dark Mode</label>
+              <label class="switch">
+                <input type="checkbox" id="dark-mode" onchange="toggleSwitch('dark-mode', this)">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <label for="notifications-sound">Notifications Sound</label>
+              <label class="switch">
+                <input type="checkbox" id="notifications-sound" onchange="toggleSwitch('notifications-sound', this)">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <label for="privacy-mode">Privacy Mode</label>
+              <label class="switch">
+                <input type="checkbox" id="privacy-mode" onchange="toggleSwitch('privacy-mode', this)">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <label for="language">Language</label>
+              <select id="language" onchange="saveSetting('language', this.value)">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+              </select>
+            </div>
+            <div class="setting-item">
+              <label for="timezone">Timezone</label>
+              <select id="timezone" onchange="saveSetting('timezone', this.value)">
+                <option value="UTC">UTC</option>
+                <option value="PST">PST</option>
+                <option value="EST">EST</option>
+              </select>
+            </div>
+          </section>
+          `;
+          break;
+        case 'history':
+          contentHTML = `
+        <section class="settings-section" id="history">
+  <h2>History Settings</h2>
+  <div class="setting-item">
+    <button id="clear-history-button" class="cool-button">Clear Browsing History</button>
+  </div>
+  <div class="setting-item">
+    <label for="history-sync">Sync History</label>
+    <label class="switch">
+      <input type="checkbox" id="history-sync" onchange="toggleSwitch('history-sync', this)">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="setting-item">
+    <label for="history-auto-delete">Auto-Delete History</label>
+    <label class="switch">
+      <input type="checkbox" id="history-auto-delete" onchange="toggleSwitch('history-auto-delete', this)">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="setting-item">
+    <label for="history-range">History Range</label>
+    <select id="history-range" class="cool-selector">
+      <option value="1-day">Last 1 Day</option>
+      <option value="7-days">Last 7 Days</option>
+      <option value="30-days">Last 30 Days</option>
+      <option value="all-time">All Time</option>
+    </select>
+  </div>
+</section>
+
+          `;
+          break;
+        case 'security':
+          contentHTML = `
+            <section class="settings-section" id="security">
+              <h2>Security Settings</h2>
+              <div class="setting-item">
+                <button onclick="changePassword()">Change Password</button>
+              </div>
+              <div class="setting-item">
+                <label for="two-factor-auth">Two-Factor Authentication (2FA)</label>
+                <label class="switch">
+                  <input type="checkbox" id="two-factor-auth" onchange="toggleSwitch('two-factor-auth', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="password-manager">Password Manager</label>
+                <label class="switch">
+                  <input type="checkbox" id="password-manager" onchange="toggleSwitch('password-manager', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="security-questions">Security Questions</label>
+                <label class="switch">
+                  <input type="checkbox" id="security-questions" onchange="toggleSwitch('security-questions', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="login-alerts">Login Alerts</label>
+                <label class="switch">
+                  <input type="checkbox" id="login-alerts" onchange="toggleSwitch('login-alerts', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </section>
+          `;
+          break;
+        case 'help':
+          contentHTML = `
+            <section class="settings-section" id="help">
+              <h2>Help & Support</h2>
+              <p>If you need help, please visit our <a href="#">support page</a> or contact us via email.</p>
+            </section>
+          `;
+          break;
+        case 'terms':
+          contentHTML = `
+            <section class="settings-section" id="terms">
+              <h2>Terms & Conditions</h2>
+              <p>By using this app, you agree to the Terms & Conditions...</p>
+            </section>
+          `;
+          break;
+        case 'storage':
+          contentHTML = `
+            <section class="settings-section" id="storage">
+              <h2>Storage Settings</h2>
+              <div class="setting-item">
+                <button>Clear Storage</button>
+              </div>
+              <div class="setting-item">
+                <button>Manage Storage</button>
+              </div>
+              <div class="setting-item">
+                <label for="auto-clean">Auto-Clean Storage</label>
+                <label class="switch">
+                  <input type="checkbox" id="auto-clean" onchange="toggleSwitch('auto-clean', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="storage-encryption">Encrypt Storage</label>
+                <label class="switch">
+                  <input type="checkbox" id="storage-encryption" onchange="toggleSwitch('storage-encryption', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="backup">Backup</label>
+                <label class="switch">
+                  <input type="checkbox" id="backup" onchange="toggleSwitch('backup', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </section>
+          `;
+          break;
+        case 'performance':
+          contentHTML = `
+            <section class="settings-section" id="performance">
+              <h2>Performance Settings</h2>
+              <div class="setting-item">
+                <label for="performance-mode">Performance Mode</label>
+                <label class="switch">
+                  <input type="checkbox" id="performance-mode" onchange="toggleSwitch('performance-mode', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="cpu-optimization">CPU Optimization</label>
+                <label class="switch">
+                  <input type="checkbox" id="cpu-optimization" onchange="toggleSwitch('cpu-optimization', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="memory-optimization">Memory Optimization</label>
+                <label class="switch">
+                  <input type="checkbox" id="memory-optimization" onchange="toggleSwitch('memory-optimization', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label for="network-optimization">Network Optimization</label>
+                <label class="switch">
+                  <input type="checkbox" id="network-optimization" onchange="toggleSwitch('network-optimization', this)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </section>
+          `;
+          break;
+      }
+      document.getElementById('dynamic-content').innerHTML = contentHTML;
+      document.getElementById(section).scrollIntoView();
+      loadStoredSettings(); // Load saved settings for the section
+    }
+
+    // Load settings from localStorage for all switches
+    function loadStoredSettings() {
+      const switches = [
+        'dark-mode', 'notifications-sound', 'privacy-mode', 'history-sync', 'history-auto-delete',
+        'two-factor-auth', 'password-manager', 'security-questions', 'login-alerts', 'auto-clean',
+        'storage-encryption', 'backup', 'performance-mode', 'cpu-optimization', 'memory-optimization', 'network-optimization'
+      ];
+      switches.forEach(switchId => {
+        const value = localStorage.getItem(switchId);
+        const switchElement = document.getElementById(switchId);
+        if (switchElement) {
+          switchElement.checked = value === 'true';
+        }
+      });
+
+      const language = localStorage.getItem('language');
+      const timezone = localStorage.getItem('timezone');
+      if (language) document.getElementById('language').value = language;
+      if (timezone) document.getElementById('timezone').value = timezone;
+    }
+
+    // Save the setting to localStorage
+    function saveSetting(key, value) {
+      localStorage.setItem(key, value);
+    }
+
+    // Handle switch toggle, play sound, and save to localStorage
+    function toggleSwitch(setting, checkbox) {
+      localStorage.setItem(setting, checkbox.checked);
+
+      // Play switch sound
+      const sound = document.getElementById('switch-sound');
+      sound.play();
+    }
+
+    window.onload = () => {
+      loadSection('general'); // Load the general section by default
+    }
+  </script>
+</body>
+</html>

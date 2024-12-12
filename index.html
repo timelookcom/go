@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tulu</title>
+    <link rel="icon" href="tt.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css"> <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header id="header">
+    <div class="header-left">
+        <a href="indexstore.html">
+            <img src="C:/Users/k153f_qqpvs8e/OneDrive/Documents/tt.png" alt="" class="logo">
+          </a>
+          
+        <h1 class="cool-text">Toolu</h1>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      // Select the cool-text heading
+      const heading = document.querySelector(".cool-text");
+
+      // Reload the page when the heading is clicked
+      heading.addEventListener("click", function() {
+        location.reload();  // Reload the page
+      });
+    });
+
+    </script>
+    <div class="header-buttons">
+        <button id="signInBtn" style="font-size: 22px;"><i class="fas fa-bell"></i></button>
+        
+        <!-- Modal Trigger (hidden until activated) -->
+        <div id="modalContainer" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeBtn">&times;</span>
+                <h2>Download Google and unlock adventures. Explore new apps, discover exciting features, and make the most of your device!</h2>
+                <div class="modal-buttons">
+                    <button class="modal-btn" id="actionOneBtn" style="background-color: #325788;">Safe Search</button>
+                    <button class="modal-btn-two" id="actionOneBtn" style="background-color:white; border: .1px solid gray; color: black;">Regular search</button>
+<style>
+    .modal-btn-two{
+        border: 2.1px solid gray;
+    }
+    body.dark-mode  .modal-btn-two{
+        border: none;
+    }
+</style>
+                    
+                </div>
+            </div>
+        </div>
+<!-- Button with bell icon -->
+<button class="Notifications" id="notify-you" aria-label="Show Notifications" style="border: none; background: none; cursor: pointer; position: relative;">
+    <i class="fas fa-user" id="bell-icon" style="font-size: 22px;"></i> <!-- Bell icon -->
+    <!-- Notification Badge -->
+   
+</button>
+
+<div id="notification-container" class="notification-container" style="display: none;">
+    <div class="notification-header">
+        <button id="close-container" class="close-btn" style="font-weight: bold; font-size: 30px;"><i class="fas fa-close"></i></button>
+       
+
+        <style>
+            
+          
+        </style>
+        
+    </div>
+    <div class="notification-body">
+        <!-- Centered Image in the notification -->
+       
+            <img src="C:\Users\k153f_qqpvs8e\OneDrive\Documents/tt.png" alt="logo-two" class="logo" style="margin-top: 50px; width: 80px; height: auto;">
+       
+        
+        <h3>Sign in or sign up!</h3>
+        <!-- Main Notification Text -->
+     
+
+        <!-- Main Action Button -->
+        <a href="sign in.html" class="cool-button" style="background-color: hwb(192 27% 42%); font-weight: bold; color: rgb(255, 251, 247); border-radius: 50px; text-decoration: none; padding: 10px 20px; display: inline-block;">Sign In</a>
+        <a href="sign in.html?signUp=true" class="cool-button" style="background-color: rgb(255, 255, 255); font-weight: bold; color: rgb(5, 5, 5); border-radius: 50px; text-decoration: none; padding: 10px 20px; display: inline-block;">
+            Sign Up
+        </a>
+        
+        <style>
+        .cool-button:hover {
+            background: none;
+        }
+        </style>
+        
+        
+    </div>
+</div>
+<!-- Updated modal container with class and ID as per your request -->
+<div id="alertContainer" class="alert-container">
+    <div class="alert-content">
+        <p id="alertMessage">Google will only let you save 10 webs</p>
+        <button id="closeAlertButton">Ok</button>
+        <button id="closeAlertButton">Remove</button>
+    </div>
+</div>
+<script>
+    // Function to open the alert container when the website limit is reached
+function openAlertContainer() {
+    document.getElementById("alertContainer").style.display = "block"; 
+}
+
+// Function to close the alert container
+function closeAlertContainer() {
+    document.getElementById("alertContainer").style.display = "none"; 
+}
+
+</script>
+
+
+<script>
+ // Initialize elements
+let notificationCount = 3; // Example notification count
+let badge = document.getElementById('notification-badge');
+let bellSound = document.getElementById('bell-sound');
+let bellIcon = document.getElementById('bell-icon');
+let notificationContainer = document.getElementById('notification-container');
+let closeButton = document.getElementById('close-container');
+
+// Show the notification badge and play sound
+function showNotification() {
+    if (notificationCount > 0) {
+        badge.textContent = notificationCount; // Update badge number
+        badge.style.display = 'inline-block'; // Show badge immediately when page loads
+        bellSound.play(); // Play the bell sound once when notifications appear
+        bellIcon.classList.add('shake'); // Shake the bell icon once
+
+        // Remove the shake animation after it completes (so it can be reused)
+        setTimeout(() => {
+            bellIcon.classList.remove('shake');
+        }, 500); // The duration of the shake animation (in ms)
+        
+        // Hide the notification badge after 6 seconds (fade-out effect)
+        setTimeout(() => {
+            badge.classList.add('fade-out'); // Apply the fade-out animation
+            setTimeout(() => {
+                badge.style.display = 'none'; // Actually hide the badge after the animation
+            }, 1000); // Wait for animation to finish (1s)
+        }, 6000); // 6000 ms = 6 seconds
+    }
+}
+
+// When the page loads, show the notification badge for 6 seconds
+window.onload = function() {
+    showNotification(); // Immediately show the notification when page loads
+};
+
+// Function to open the notification container when the bell is clicked
+document.getElementById('notify-you').addEventListener('click', function() {
+    // Show the notification container with a cool animation
+    notificationContainer.style.display = 'block';
+    setTimeout(() => {
+        notificationContainer.style.opacity = '1'; // Smooth fade-in effect
+    }, 10);
+
+    // Reset the notification badge so it doesn't reappear
+    badge.style.display = 'none';
+});
+
+// Close the notification container when the "close" button is clicked
+closeButton.addEventListener('click', function() {
+    notificationContainer.style.opacity = '0'; // Fade-out effect
+    setTimeout(() => {
+        notificationContainer.style.display = 'none'; // Hide the container after fade-out
+    }, 500); // Wait for animation to complete
+});
+
+// Function to make the bell ring every 4 seconds
+function ringBellEvery4Seconds() {
+    setInterval(() => {
+        // Play the bell sound
+        bellSound.play();
+
+        // Shake the bell icon
+        bellIcon.classList.add('shake');
+
+        // Remove the shake animation after it completes (so it can repeat)
+        setTimeout(() => {
+            bellIcon.classList.remove('shake');
+        }, 500); // Duration of shake animation
+    }, 4000); // 4000 ms = 4 seconds
+}
+
+// Start ringing the bell every 4 seconds
+ringBellEvery4Seconds();
+
+// Example of handling button actions
+function openSettings() {
+    alert("Opening Settings...");
+}
+
+function viewAllNotifications() {
+    alert("Viewing all notifications...");
+}
+
+</script>        
+    <!-- Menu Button -->
+    <button id="menuBtn" class="menu-button">
+        <i class="fas fa-ellipsis-v"></i>
+    </button>
+</header>
+<!-- Dropdown Menu -->
+<div id="dropdownMenu" class="dropdown-menu">
+    <button onclick="window.open('setting.html', '_blank')">Settings</button>
+    <button id="themeBtn">Theme</button>
+    <button>Privacy</button>
+    <button id="languageBtn">Language</button>
+    <button>Security</button>
+    <button onclick="window.open('help.html', '_blank')">Help & Support</button>
+    <div id="languageOptions" class="language-options">
+        <ul id="languageList">
+            <!-- Your language options here -->
+        </ul>
+    </div>
+  
+   <!-- Language options will go here -->
+        </ul>
+    </div>
+</div>
+
+<div class="search-bar" id="searchBar">
+    <div class="search-input-container">
+        <i class="fas fa-search icon search-icon"></i> 
+        <input type="text" id="searchInput" placeholder="" autocomplete="off">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABd0lEQVR4nO1VzUrDQBBePPt3V/AH9SwKeuihaLPb4sE30ryEB012GsGTlmjbndRDFXyIgvgK/qHxAZRJsjGK26a0eMrAsDDMzjfz7cwsYzmk5nTmhcQGBwxjVb5VV6t57uYKzkG9CMDPrJJt91TNjQwgJDZ+B09BpDofGYADhiYAAept9ArAFDzWAoAVFP0vRQLwgy7ty+aUtnGp3vPMQe2sMx1POIZ9ANRD5OThegoAyjcCSGxov2q9vRFPN94bATigk+yZA22rOMGakPj81y4SbmslTU6inVR1bK5A4k6yYx6pZG2npUZ7h+iKKKP9lAle9q5mdRIWtMtGgATkLsnQt217oq8zY4x8uFTNmDJ1O8ifVb3rRQ74mnB8aZ10Z0y+lLkOTpTtSVxgeYQDbmf+gCcBeEiPWD66mKQOEy5uRpzrt6HTVVtsGKkALgvAm0FzwCV2udNaGir4j2rcoETdxQF73x2EvcjmBiU2ThHj+gMKAJaRL4qT422+ypnLAAAAAElFTkSuQmCC"  alt="Microphone " class="mic-icon" id="microphoneIcon">
+
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABpUlEQVR4nO2ZX04CMRDGm0A4gR7Ae5CsGmbwAnse3hAPoAHpeIC+uR185SjgHxRelcQQTTSVVQtEze66yzbpL+nLPnz9ZqbdtFMhPB6Pp9Qc0dUuku4C6VuQ/IrEb8uhX1ByO6s+Sm5/aMW6Zg4zF0ruwfnlXiZxuBgcotSzb9NrQ+p59gD0/Ed94ifsDyB95n8zn1MFcDNJs6AX7SQXJt39KivpcYOiIFSqInImVKrSoKgOUo+sZXWWWAgk33wKGPOiYFDygZ3AxAL2hi0i8+sErWHV3tgiKfY6FFsCs3hwPgCQvIjLt8jFXd4e0PzepH7+j19lWrAEHjwej4uEStVQ8gmQvkfiCRB3zDfhCkDcWT9Vmm/CFWCZ+dUApH4QroDEk81zPd8Jp5eQ1MfCFUKlanEQEyc3scfjKQFYgssEZvHg/pWSHL/Uo+sBgOuNLVhtLdZzcflXZzxLa9H0562D2Mj0KouoRNAaVmPz11Yn/DSxkHlcAOLHrbfXiaep2uuGJnFjyw8c02Zf72eawERv+vOmpAU+MY3NskmdeY/H4xFF8Q6f+1L5OyWU1gAAAABJRU5ErkJggg==" alt="square-border" class="images-icon">
+
+    </div>
+</div>
+<!-- Search Results Container -->
+<div id="searchResultsContainer" class="search-results-container" style="display: none;">
+    <ul id="searchResultsList">
+        <!-- Search suggestions will be added here dynamically -->
+    </ul>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchBar = document.getElementById('searchBar');
+    const searchInput = document.getElementById('searchInput');
+    const searchResultsContainer = document.getElementById('searchResultsContainer');
+    const searchResultsList = document.getElementById('searchResultsList');
+
+    // Dummy search suggestions
+    const suggestions = [
+        "Apple",
+        "Banana",
+        "Orange",
+        "Grapes",
+        "Mango",
+        "Pineapple",
+        "Strawberry",
+        "Peach",
+        "Blueberry"
+    ];
+
+    // Dummy trending items
+    const trendingItems = [
+        "Facebook",
+        "Instagram",
+        "Twitter",
+        "LinkedIn",
+        "Reddit",
+        "YouTube",
+        "TikTok",
+        "Netflix"
+    ];
+
+    // Listen for click events on the search bar
+    searchBar.addEventListener('click', function() {
+        searchInput.focus();  // Focus on the search input field when search bar is clicked
+        if (searchInput.value.trim() === '') {
+            // Clear the current search result list
+            searchResultsList.innerHTML = '';
+
+            // Populate the search results container with trending items
+            trendingItems.forEach(function(item) {
+                const listItem = document.createElement('li');
+                
+                // Create trending icon (FontAwesome trending icon)
+                const trendingIcon = document.createElement('i');
+                trendingIcon.classList.add('fas', 'fa-fire');  // FontAwesome trending icon class
+                trendingIcon.style.marginRight = '15px';  // Space between icon and text
+                
+                const itemText = document.createElement('span');
+                itemText.textContent = item;
+
+                // Append the icon and the item to the list item
+                listItem.appendChild(trendingIcon);
+                listItem.appendChild(itemText);
+
+                searchResultsList.appendChild(listItem);
+            });
+
+            // Show the search results container
+            searchResultsContainer.style.display = 'block';
+        }
+    });
+
+    // Listen for input events on the search input field
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value.trim();  // Get the search input value
+        
+        // Clear the current search result list
+        searchResultsList.innerHTML = '';
+
+        if (query.length > 0) {
+            // Filter suggestions based on the input query
+            const filteredSuggestions = suggestions.filter(function(suggestion) {
+                return suggestion.toLowerCase().includes(query.toLowerCase());
+            });
+
+            // Populate the search results container with trending items that match the query
+            const filteredTrendingItems = trendingItems.filter(function(item) {
+                return item.toLowerCase().includes(query.toLowerCase());
+            });
+
+            // Combine trending items and suggestions, with trending items at the top
+            const combinedResults = [...filteredTrendingItems, ...filteredSuggestions].slice(0, 8);
+
+            // Populate the search results container with combined results
+            combinedResults.forEach(function(result) {
+                const listItem = document.createElement('li');
+                
+                // Determine if the result is a trending item or a suggestion
+                const isTrending = trendingItems.includes(result);
+                const iconClass = isTrending ? 'fa-fire' : 'fa-search';
+
+                // Create icon (FontAwesome icon)
+                const icon = document.createElement('i');
+                icon.classList.add('fas', iconClass);  // FontAwesome icon class
+                icon.style.marginRight = '15px';  // Space between icon and text
+                
+                const resultText = document.createElement('span');
+                resultText.textContent = result;
+
+                // Append the icon and the result to the list item
+                listItem.appendChild(icon);
+                listItem.appendChild(resultText);
+
+                searchResultsList.appendChild(listItem);
+            });
+
+            // Show the search results container
+            searchResultsContainer.style.display = 'block';
+        } else {
+            // Hide the search results container if input is empty
+            searchResultsContainer.style.display = 'none';
+        }
+    });
+
+    // Close the search results and search bar when clicking outside the container
+    document.addEventListener('click', function(event) {
+        if (!searchBar.contains(event.target) && !searchResultsContainer.contains(event.target)) {
+            searchResultsContainer.style.display = 'none';
+            searchInput.blur();  // Remove focus from the search input field
+        }
+    });
+
+    // Optional: Highlight suggestion on hover
+    searchResultsList.addEventListener('mouseover', function(event) {
+        if (event.target.tagName.toLowerCase() === 'li') {
+            event.target.style.backgroundColor = 'none'; // Highlight the hovered suggestion
+        }
+    });
+
+    // Reset suggestion highlight when mouse leaves
+    searchResultsList.addEventListener('mouseout', function(event) {
+        if (event.target.tagName.toLowerCase() === 'li') {
+            event.target.style.backgroundColor = ''; // Remove highlight when mouse leaves
+        }
+    });
+
+    // Optional: Select a suggestion when clicked
+    searchResultsList.addEventListener('click', function(event) {
+        if (event.target.tagName.toLowerCase() === 'li') {
+            searchInput.value = event.target.textContent;  // Set input value to the selected suggestion
+            searchResultsContainer.style.display = 'none';  // Hide results after selection
+        }
+    });
+});
+
+</script>
+<style>
+    ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+</style>
+
+<!-- Circle button and text container -->
+<div class="circle-buttons" id="circleButtonsContainer">
+    <div class="circle-btn-container" onclick="openAddWebsiteContainer()">
+        <div class="circle-btn">
+            <i class="fas fa-plus"></i>
+        </div>
+        <span class="button-text"></span>
+    </div>  
+</div>
+
+<!-- Image that replaces the circle buttons when they are hidden -->
+<img id="circleImage" src="C:\Users\k153f_qqpvs8e\Pictures\Documents\Module 2/fire.png" alt="Circle Button Image" style="display:none; margin-top: 170px;position: absolute;">
+
+<!-- Small buttons -->
+<div class="small-buttons">
+    <button class="small-btn" id="fireButton"><i class="fas fa-fire"></i></button>
+    <button class="small-btn"><i class="fas fa-store"></i></button>
+    <button class="small-btn"><i class="fas fa-ad"></i></button>
+   
+</div>
+<style>
+  
+</style>
+</head>
+<body>
+    <div class="add-website-container" id="addWebsiteContainer">
+        <button class="open add-container controls" onclick="newButtonFunction(event)">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <style>
+          
+          </style>
+          
+          
+    
+        <!-- Container that appears when button is clicked -->
+        <div id="optionsContainer" class="options-container">
+            <div id="deleteOption" class="option-item"> 
+                <i class="fas fa-trash"></i> Delete
+            </div>
+            <div id="reportOption" class="option-item"> 
+                <i class="fas fa-flag"></i> Report
+            </div>
+            <div id="signInOption" class="option-item" onclick="window.location.href='sign in.html';"> 
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </div>
+            <div id="shareOption" class="option-item"> 
+                <i class="fas fa-share-alt"></i> Share
+            </div>
+            <div id="helpOption" class="option-item"> 
+                <i class="fas fa-question-circle"></i> Help
+            </div>
+        </div>
+        
+    
+        <script>
+            // Function to toggle Dark Mode on the body
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const button = document.querySelector('.dark-mode-toggle');
+                button.classList.toggle('dark-mode'); // Change the button style in dark mode
+                const optionsContainer = document.getElementById('optionsContainer');
+                optionsContainer.classList.toggle('dark-mode'); // Change options container style in dark mode
+                const optionItems = document.querySelectorAll('.option-item');
+                optionItems.forEach(item => item.classList.toggle('dark-mode')); // Change option items style
+            }
+    
+            // Function to toggle the visibility of the options container
+            function newButtonFunction(event) {
+                // Prevent the click from propagating to the document
+                event.stopPropagation();
+    
+                const container = document.getElementById('optionsContainer');
+                // Toggle the visibility of the options container
+                container.style.display = (container.style.display === 'block' ? 'none' : 'block');
+            }
+    
+            // Function to close the options container if clicked outside of it
+            function closeOptionsContainer(event) {
+                const container = document.getElementById('optionsContainer');
+                const button = document.querySelector('button');
+    
+                // If the click is outside the button and the options container, hide the container
+                if (!container.contains(event.target) && !button.contains(event.target)) {
+                    container.style.display = 'none';
+                }
+            }
+    
+            // Add event listener for clicks outside of the container
+            document.addEventListener('click', closeOptionsContainer);
+        </script>
+        <style>
+           
+        </style>
+    
+        <h2>Add Website</h2>
+        
+        <!-- Input and Button Container -->
+        <div class="input-container">
+            <input type="text" id="websiteNameInput" placeholder="Enter website name">
+    
+            <button onclick="addWebsite()" style="width: 40px; height: 40px; border-radius: 50%; background-color: white; color: rgb(0, 0, 0); border: none; font-size: 24px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s;">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    
+        <!-- Round buttons container -->
+        <div class="round-buttons" id="roundButtonsContainer" style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+            <!-- Placeholder for dynamically added buttons -->
+        </div>
+ 
+    
+   
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const roundButtonsContainer = document.getElementById("roundButtonsContainer");
+    const websiteNameInput = document.getElementById("websiteNameInput");
+
+    // List of popular websites
+    const websites = [
+        // Social Media
+        { name: "Facebook", url: "https://www.facebook.com" },
+        { name: "Instagram", url: "https://www.instagram.com" },
+        { name: "Twitter", url: "https://twitter.com" },
+        { name: "LinkedIn", url: "https://www.linkedin.com" },
+        { name: "Reddit", url: "https://www.reddit.com" },
+        { name: "youtube", url: "https://www.youtube.com" },
+       
+
+        // Streaming/Entertainment
+        
+        { name: "TikTok", url: "https://www.tiktok.com" },
+        { name: "Netflix", url: "https://www.netflix.com" },
+        { name: "Netflix", url: "https://www.hulu.com" },
+        { name: "Disney", url: "https://www.disney.com" },
+        { name: "Spotify", url: "https://www.spotify.com" },
+
+        // Stores & E-Commerce
+        { name: "Amazon", url: "https://www.amazon.com" },
+        { name: "eBay", url: "https://www.ebay.com" },
+        { name: "Temu", url: "https://www.temu.com" },
+        { name: "Best Buy", url: "https://www.bestbuy.com" },
+        { name: "Target", url: "https://www.target.com" },
+
+      
+    ];
+
+    // Initialize the page with the specified websites
+    websites.forEach(website => {
+        createWebsiteButton(website.name, website.url);
+    });
+
+    // Function to create a website button with logo
+    function createWebsiteButton(name, websiteURL) {
+        let websiteLogo = getLogo(websiteURL);  // Get the logo from Clearbit API
+        let imgSrc = websiteLogo;
+
+        // Create the new button container
+        const newButtonContainer = document.createElement("div");
+        newButtonContainer.classList.add("circle-btn-container");
+
+        // Create the button itself (circle with icon inside)
+        const newButton = document.createElement("div");
+        newButton.classList.add("circle-btn");
+        newButton.setAttribute("data-url", websiteURL); // Add a data attribute to uniquely identify the button
+
+        // Create the image (logo)
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = `${name} Logo`;
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        img.style.borderRadius = "50%";
+
+        // Add error handling for failed logo load
+        img.onerror = function () {
+            console.log(`Image failed to load for: ${websiteURL}, using fallback.`);
+            img.src = "https://via.placeholder.com/128?text=No+Logo";  // Fallback to a default logo
+        };
+
+        // Append the image to the button
+        newButton.appendChild(img);
+
+        // Set the button's click event to populate the input field with the website's name
+        newButton.onclick = function () {
+            websiteNameInput.value = name; // Populate the input field with the website's name
+        };
+
+        // Append the button to the new container
+        newButtonContainer.appendChild(newButton);
+
+        // Prepend the new button container to the round buttons container
+        roundButtonsContainer.appendChild(newButtonContainer);
+    }
+
+    // Function to get the logo from Clearbit API based on the website URL
+    function getLogo(websiteURL) {
+        const domain = new URL(websiteURL).hostname;  // Get the domain from the URL
+        const logoURL = `https://logo.clearbit.com/${domain}?size=128`;  // Request a 128px logo
+        return logoURL;
+    }
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const addWebsiteContainer = document.getElementById("addWebsiteContainer");
+    const websiteNameInput = document.getElementById("websiteNameInput");
+    const circleButtons = document.querySelector(".circle-buttons");
+    const deleteOption = document.getElementById("deleteOption");
+    const alertContainer = document.getElementById("alertContainer");
+    const closeAlertButton = document.getElementById("closeAlertButton");
+
+    // Predefined popular websites
+    const popularWebsites = [
+      
+        "https://www.twitter.com", // Example: Add more websites here
+        "https://www.google.com"
+    ];
+
+    // To keep track of added websites (using localStorage)
+    const addedWebsites = new Set(JSON.parse(localStorage.getItem('addedWebsites')) || []);
+
+    let deleteTimer; // Timer for hiding delete icons after 10 seconds
+
+    // Initialize the page with predefined popular websites (Facebook, Instagram, etc.)
+    function initializePopularWebsites() {
+        // Add predefined websites if not already added
+        popularWebsites.forEach(url => {
+            if (!addedWebsites.has(url)) {
+                addedWebsites.add(url);
+                createWebsiteButton(url);  // Create button for the website
+            }
+        });
+
+        // Initialize any websites that have already been added by the user
+        addedWebsites.forEach(url => {
+            createWebsiteButton(url);
+        });
+
+        // Save the updated list of websites to localStorage
+        localStorage.setItem('addedWebsites', JSON.stringify(Array.from(addedWebsites)));
+    }
+
+    // Function to open the Add Website container
+    function openAddWebsiteContainer() {
+        addWebsiteContainer.style.display = "block"; // Show the container
+    }
+
+    // Function to add a new website manually
+    function addWebsite() {
+        // Check if there are already 11 websites saved
+        if (addedWebsites.size >= 11) {
+            openAlertContainer(); // Show the custom alert container when the limit is exceeded
+            addWebsiteContainer.style.display = "none"; // Hide the add website container
+            return;
+        }
+
+        let websiteName = websiteNameInput.value.trim();
+
+        if (websiteName === "") {
+            alert("Please enter a website URL.");
+            return;
+        }
+
+        // Normalize the URL and ensure it's valid
+        websiteName = formatWebsiteURL(websiteName);
+
+        // Check if this website has already been added
+        if (addedWebsites.has(websiteName)) {
+            alert("This website is already saved.");
+            return;
+        }
+
+        // Mark this website as added
+        addedWebsites.add(websiteName);
+
+        // Save the updated list of websites to localStorage
+        localStorage.setItem('addedWebsites', JSON.stringify(Array.from(addedWebsites)));
+
+        // Create a button for the new website
+        createWebsiteButton(websiteName);
+
+        // Hide the input container and reset the input field
+        addWebsiteContainer.style.display = "none";
+        websiteNameInput.value = ""; // Clear the input field
+    }
+
+    // Function to create a website button with logo and name
+    function createWebsiteButton(websiteURL) {
+        const displayName = extractWebsiteName(websiteURL);
+        let websiteLogo = getLogo(websiteURL);
+        let imgSrc = websiteLogo;
+
+        // Check if the website button already exists
+        const existingButton = document.querySelector(`[data-url="${websiteURL}"]`);
+        if (existingButton) {
+            return; // Prevent duplicate buttons
+        }
+
+        // Create the button container
+        const newButtonContainer = document.createElement("div");
+        newButtonContainer.classList.add("circle-btn-container");
+        newButtonContainer.style.position = "relative";  // Ensure positioning for delete icon
+
+        // Create the button (circle with logo)
+        const newButton = document.createElement("div");
+        newButton.classList.add("circle-btn");
+        newButton.setAttribute("data-url", websiteURL);
+
+        // Create the image (logo)
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = `${displayName} Logo or Profile Picture`;
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";  // Ensure it fits inside the circle
+        img.style.borderRadius = "50%";   // Ensure it's round
+
+        img.onerror = function () {
+            img.src = "https://via.placeholder.com/128?text=No+Logo";  // Fallback logo
+        };
+
+        newButton.appendChild(img);
+
+        // Create the text (website name) outside the button
+        const text = document.createElement("span");
+        text.classList.add("button-text");
+        text.innerText = displayName;
+
+        // Create the delete icon
+        const deleteIcon = document.createElement('span');
+        deleteIcon.classList.add('delete-icon');
+        deleteIcon.innerHTML = '&#10006;';
+        deleteIcon.style.display = 'none'; // Initially hidden
+        deleteIcon.style.position = 'absolute';
+        deleteIcon.style.top = '-10px';
+        deleteIcon.style.right = '-10px';
+        deleteIcon.style.cursor = 'pointer';
+
+        newButtonContainer.appendChild(deleteIcon);
+
+        let clickCount = 0;
+        let clickTimer;
+
+        // Function to handle button click/hold behavior for showing delete icon
+        newButton.addEventListener("mousedown", function () {
+            clickCount++;
+            if (clickCount === 1) {
+                clickTimer = setTimeout(() => {
+                    deleteIcon.style.display = "block"; // Show delete icon on hold
+                    clickCount = 0;
+                }, 500);
+            }
+        });
+
+        newButton.addEventListener("mouseup", function () {
+            clearTimeout(clickTimer);
+            if (clickCount === 1) {
+                loadWebsite(websiteURL);
+            }
+            clickCount = 0;
+        });
+
+        // Delete icon click event
+        deleteIcon.addEventListener("click", function (event) {
+            event.stopPropagation(); // Prevent click from propagating to the circle button
+
+            // Trigger fade-out animation
+            newButtonContainer.classList.add("fade-out");
+
+            // After transition ends, remove the button
+            newButtonContainer.addEventListener('transitionend', function () {
+                newButtonContainer.remove();
+            });
+
+            addedWebsites.delete(websiteURL);
+            localStorage.setItem('addedWebsites', JSON.stringify(Array.from(addedWebsites)));
+
+            resetDeleteTimer(); // Reset the delete timer
+        });
+
+        // Append the button and text
+        newButtonContainer.appendChild(newButton);
+        newButtonContainer.appendChild(text);
+
+        // Prepend the button container to the circle buttons container
+        circleButtons.insertBefore(newButtonContainer, circleButtons.firstChild);
+    }
+
+    // Function to format website URL if necessary
+    function formatWebsiteURL(input) {
+        if (input.startsWith('http://') || input.startsWith('https://')) {
+            return input;
+        }
+        if (input.match(/^[a-zA-Z0-9.-]+$/)) {
+            const tlds = ['.com', '.org', '.net', '.co', '.io', '.gov', '.edu'];
+            let formattedURL = input;
+            if (!formattedURL.startsWith('www.')) {
+                formattedURL = 'www.' + formattedURL;
+            }
+            if (!tlds.some(tld => formattedURL.endsWith(tld))) {
+                formattedURL += '.com';
+            }
+            return 'https://' + formattedURL;
+        }
+        return 'https://' + input;
+    }
+
+    // Function to extract the website name
+    function extractWebsiteName(url) {
+        const hostname = url.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+        const parts = hostname.split('.');
+        return parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+    }
+
+    // Function to get the logo from Clearbit
+    function getLogo(websiteURL) {
+        const domain = new URL(websiteURL).hostname;
+        const logoURL = `https://logo.clearbit.com/${domain}?size=128`;
+        return logoURL;
+    }
+
+    // Function to load a website when the button is clicked
+    function loadWebsite(url) {
+        window.open(url, "_blank");
+    }
+
+    // Function to show all delete icons
+    function showDeleteIcons() {
+        const deleteIcons = document.querySelectorAll('.delete-icon');
+        deleteIcons.forEach(icon => {
+            icon.style.display = 'block'; // Show all delete icons
+        });
+        resetDeleteTimer(); // Reset timer for hiding delete icons
+    }
+
+    // Function to hide all delete icons
+    function hideDeleteIcons() {
+        const deleteIcons = document.querySelectorAll('.delete-icon');
+        deleteIcons.forEach(icon => {
+            icon.style.display = 'none'; // Hide all delete icons
+        });
+    }
+
+    // Function to reset the delete timer (for auto-hiding after 10 seconds)
+    function resetDeleteTimer() {
+        clearTimeout(deleteTimer);
+        deleteTimer = setTimeout(() => {
+            hideDeleteIcons(); // Hide delete icons after 10 seconds
+        }, 10000); // 10 seconds
+    }
+
+    // Click outside to hide delete icons
+    document.addEventListener('click', function (e) {
+        if (!circleButtons.contains(e.target) && !deleteOption.contains(e.target)) {
+            hideDeleteIcons();
+            clearTimeout(deleteTimer); // Clear timer if clicked outside
+        }
+    });
+
+    // Delete Option button click event
+    deleteOption.addEventListener('click', function () {
+        addWebsiteContainer.style.display = 'none'; // Close the Add Website container
+        showDeleteIcons(); // Show delete icons when in delete mode
+    });
+
+    // Close the alert container
+    closeAlertButton.addEventListener('click', function () {
+        closeAlertContainer(); // Close the alert container
+    });
+
+    // Open the alert container when the website limit is reached
+    function openAlertContainer() {
+        alertContainer.style.display = "block";
+    }
+
+    // Close the alert container
+    function closeAlertContainer() {
+        alertContainer.style.display = "none";
+        addWebsiteContainer.style.display = "block"; // Show add website container again
+    }
+
+    // Initialize the page with popular websites
+    initializePopularWebsites();
+
+    window.addWebsite = addWebsite;
+    window.openAddWebsiteContainer = openAddWebsiteContainer;
+});
+
+
+</script>
+
+    
+    <span class="close-btn" onclick="closeContainer()">×</span>
+</div>
+
+<script>
+    function fillInput(url) {
+        document.getElementById('websiteNameInput').value = url;
+    }
+
+    function closeContainer() {
+        document.getElementById('addWebsiteContainer').style.display = 'none';
+    }
+
+</script>
+<script>
+  
+</script>
+
+
+<div class="search-engine-selector">
+    <select id="searchEngine">
+        <option value="bing">Bing</option>
+        <option value="google">Google</option>
+        <option value="duckduckgo">DuckDuckGo</option>
+    </select>
+</div>
+
+<div id="iframe-container" style="position: relative;">
+    <iframe id="resultsFrame" style="display: none; width: 100%; height: 100%;"></iframe>
+</div>
+<div class="footer" id="footer">
+    <a href="#">Careers</a>
+    <a href="help.html">Help</a>
+    <a href="setting.html">Settings</a>
+    <a href="terms.html">Terms</a>
+    <a href="#">About</a>
+</div>
+
+
+
+<script src="inlow.js"></script> <!-- Link to your external JavaScript file -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const fireButton = document.getElementById("fireButton");
+    const circleButtonsContainer = document.getElementById("circleButtonsContainer");
+    const circleImage = document.getElementById("circleImage");
+    const modalContainer = document.getElementById("modalContainer");
+    const actionOneBtn = document.getElementById("actionOneBtn");
+
+    // Initially set visibility to visible for the circle buttons, and hide the image
+    circleButtonsContainer.style.opacity = 1; // Circle buttons are visible
+    circleImage.style.display = "none";  // Ensure the image is hidden initially
+    circleImage.style.opacity = 0;  // Hide the image initially with opacity
+
+    // Add smooth transition to opacity on both elements
+    circleButtonsContainer.style.transition = "opacity 0.5s ease";
+    circleImage.style.transition = "opacity 0.5s ease, display 0s 0.5s"; // Add delay for display change after opacity transition
+
+    // Add event listener for the "fire" button click
+    fireButton.addEventListener("click", function() {
+        // If the circle buttons are visible, hide them and show the image
+        if (circleButtonsContainer.style.opacity == 1) {
+            circleButtonsContainer.style.opacity = 0;  // Fade out the circle buttons
+            setTimeout(function() {
+                // Instead of display: none, just leave it in the document flow and reduce opacity
+                circleImage.style.display = "block";  // Show the image
+                setTimeout(function() {
+                    circleImage.style.opacity = 1;  // Fade in the image
+                }, 50);  // Small delay for the opacity transition to start
+            }, 500);  // Wait for the fade-out transition to finish (0.5s)
+        } else {
+            // If the image is visible, hide the image and show the circle buttons
+            circleImage.style.opacity = 0;  // Fade out the image
+            setTimeout(function() {
+                circleImage.style.display = "none";  // Actually hide the image after fading out
+            }, 500);  // Wait for the fade-out transition to finish
+            circleButtonsContainer.style.opacity = 1;  // Fade in the circle buttons
+        }
+    });
+
+    // Add event listener for the "Safe Search" button click
+    actionOneBtn.addEventListener("click", function() {
+        // Trigger the fire button's functionality (click event)
+        fireButton.click();  // Simulate a click on the fire button
+
+        // Close the modal by hiding the modal container
+        modalContainer.style.display = "none";  // Hide the modal
+    });
+});
+
+
+ 
+
+    // Modal Window JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalContainer = document.getElementById('modalContainer');
+        const closeBtn = document.getElementById('closeBtn');
+        const actionOneBtn = document.getElementById('actionOneBtn');
+        const actionTwoBtn = document.getElementById('actionTwoBtn');
+
+        // Function to open the modal (you can trigger this by a button or other event)
+        function openModal() {
+            modalContainer.style.display = 'block';
+        }
+
+        // Close modal on clicking the close button
+        closeBtn.onclick = function() {
+            modalContainer.style.display = 'none';
+        }
+
+        // Close modal after action (for example, actionTwo)
+        actionTwoBtn.onclick = function() {
+            modalContainer.style.display = 'none';
+        }
+
+        // Trigger the modal (example: a button click or another event)
+        document.getElementById('Notifications').addEventListener('click', openModal);
+    });
+
+    // Dropdown Menu JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.getElementById('menuBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        // Toggle dropdown menu visibility
+        menuButton.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('visible');
+        });
+    });
+</script>
+
+   
+
+
+</body>
+</html>

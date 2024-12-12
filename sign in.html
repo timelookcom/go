@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="sign in.css">
+    <style>
+    
+
+        /* Main content area takes available space */
+        .container {
+            text-align: center;
+            flex-grow: 8; /* This ensures that the main content area expands to fill available space */
+            padding: 20px;
+            margin-top: 136px;
+        }
+
+        /* Footer Styles */
+        .footer-links {
+            width: 100%;
+            background-color: #ffffff;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 14px;
+            color: #333;
+            margin-top: 60px; /* Space above the footer */
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-links a {
+            color: #4A90E2;
+            text-decoration: none;
+            margin: 5px 15px;
+            display: inline-block;
+            line-height: 1.5;
+        }
+
+        .footer-links a:hover {
+            color: #357ABD;
+        }
+
+        /* Footer links are organized in multiple rows */
+        .footer-links .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-links .footer-row a {
+            margin: 5px 15px;
+        }
+
+        /* Scrollable content */
+        .content {
+            padding-bottom: 60px; /* To ensure the footer doesn't overlap */
+        }
+
+        /* Centered Sign Up and Sign In link container */
+        .sign-up-link {
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Align content vertically */
+            flex-direction: column;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .sign-up-link p {
+            margin-bottom: 10px; /* Space between text and button */
+        }
+
+        /* Stylish Sign In Button */
+        .sign-up-link button {
+            background: linear-gradient(90deg, #4A90E2, #357ABD);
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect for the button */
+        .sign-up-link button:hover {
+            background: linear-gradient(90deg, #357ABD, #4A90E2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Button focus style */
+        .sign-up-link button:focus {
+            outline: none;
+            box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
+        }
+
+        /* Button active style */
+        .sign-up-link button:active {
+            transform: translateY(1px);
+        }
+
+        /* Language selector container (only in sign up form) */
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .language-selector select {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .language-selector select:hover {
+            border-color: #4A90E2;
+        }
+
+        /* Hidden form */
+        .hidden {
+            display: none;
+        }
+        
+/* Style for the logo itself */
+
+
+    </style>
+</head>
+<body>
+
+   
+    <div class="container">
+        <!-- Sign In Form -->
+        <button class="back-btn" onclick="window.history.back()"> <i class="fas fa-arrow-left"></i></button>
+        <img src="C:\Users\k153f_qqpvs8e\OneDrive\Documents/tt.png" alt="logo-two" class="logo" style="  display: block; margin-top: 0px; text-align: center; width: 80px; height: auto;">
+        <div id="signInForm" class="form-container show">
+            <h2>Sign In</h2>
+            <form id="signInFormElement">
+                <div class="input-group">
+                  
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required aria-labelledby="email">
+                </div>
+                <div class="input-group">
+                    
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required aria-labelledby="password">
+                </div>
+                <button type="submit" class="submit-btn">Sign In</button>
+                
+                <!-- Forgot Password Link -->
+                <div class="forgot-password">
+                    <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+                </div>
+            </form>
+            
+            <!-- Sign Up Link -->
+            <div class="sign-up-link">
+                <p>Don't have an account?</p>
+                <button id="showSignUpBtn">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Sign Up Form (Initially hidden) -->
+        <div id="signUpForm" class="form-container hidden">
+            <h2>Create an Account</h2>
+            <form id="signUpFormElement">
+                <div class="input-group">
+                   
+                    <input type="email" id="newEmail" name="newEmail" placeholder="Enter your email or phone number" required aria-labelledby="newEmail">
+                </div>
+                <div class="input-group">
+                   
+                    <input type="text" id="username" name="username" placeholder="Your first and last name" required aria-labelledby="Your first and last name">
+                </div>
+                <div class="input-group">
+                   
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required aria-labelledby="username">
+                </div>
+                <div class="input-group">
+                   
+                    <input type="password" id="newPassword" name="newPassword" placeholder="Enter your password" required aria-labelledby="newPassword">
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+
+            <!-- Language Selector (Only in sign up form) -->
+            <div class="language-selector">
+                <select id="language-select-signup" aria-label="Language selector">
+                    <option value="en">English (US)</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="zh">中文(简体)</option>
+                    <option value="ar">العربية</option>
+                    <option value="pt">Português (Brasil)</option>
+                    <option value="it">Italiano</option>
+                    <option value="ko">한국어</option>
+                    <option value="de">Deutsch</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </div>
+
+            <!-- Sign In Link -->
+            <div class="sign-up-link">
+                <p>Already have an account?</p>
+                <button id="showSignInBtn">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <h3>Reset Your Password</h3>
+            <form id="resetPasswordForm">
+                <div class="input-group">
+                    <label for="resetInput">Enter your email or phone number</label>
+                    <input type="text" id="resetInput" name="resetInput" placeholder="Email or Phone" required>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+                <p id="resetMessage" style="display:none; color: green;">A reset link/code has been sent!</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Section with 20 Links -->
+    <div class="footer-links">
+        <div class="footer-row">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Help</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">Advertising</a>
+            <a href="#">Developers</a>
+            <a href="#">How Search Works</a>
+        </div>
+       
+
+    <script src="sign in.js"></script>
+
+</body>
+</html>

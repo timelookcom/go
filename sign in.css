@@ -1,0 +1,344 @@
+/* Reset and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling: Flexbox centering */
+body {
+    font-family: 'Arial', sans-serif;
+    background: rgb(230, 226, 226);
+    display: flex;
+    justify-content: center;      /* Center horizontally */
+    align-items: center;          /* Center vertically */
+    height: 100vh;                 /* Full height */
+    margin: 0;                     /* Remove default margin */
+    flex-direction: column;        /* Allow vertical stacking */
+    color: #333;
+}
+
+/* Back button style */
+.back-btn {
+    position: absolute;
+    margin-bottom: -990px;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(74, 144, 226, 1); /* Solid blue color */
+    color: white;
+    font-size: 20px; /* Slightly bigger icon for readability */
+    width: 40px; /* Small circular button */
+    height: 40px; /* Perfect circle */
+    border: none;
+    border-radius: 50%;  /* Circular shape */
+    display: flex;
+    justify-content: center;  /* Center the content */
+    align-items: center;      /* Center the content */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;  /* Smooth transition for hover effects */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    opacity: 1;
+    user-select: none; /* Prevent text selection */
+}
+
+/* Hover effect */
+.back-btn:hover {
+    background-color: rgba(53, 122, 189, 1); /* Darker blue on hover */
+    transform: translateY(-2px);  /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Focus effect */
+.back-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(53, 122, 189, 0.3);  /* Soft blue focus ring */
+}
+
+/* Container for form */
+.container {
+    justify-content: center;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Fade-in effect for form container */
+.form-container {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+}
+
+.form-container.show {
+    opacity: 1;
+}
+
+/* Heading styles */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0a0a0a;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fafafa;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect on inputs */
+.input-group input:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+}
+
+.input-group input:focus + label {
+    color: #4A90E2;
+    transform: translateY(-18px);
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: #4A90E2;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Glowing effect on button hover */
+.submit-btn:hover {
+    background-color: #357ABD;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3);
+}
+
+.submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.forgot-password a {
+    color: #4A90E2;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #357ABD;
+}
+
+/* Sign-up link style (modern and cool) */
+.sign-up-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.sign-up-link p {
+    margin: 0;
+}
+
+/* Stylish link */
+.sign-up-link button {
+    background: linear-gradient(90deg, #43fa9e, #25bb00);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for the button */
+.sign-up-link button:hover {
+    background: linear-gradient(90deg, #357ABD, #4A90E2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+/* Button focus style */
+.sign-up-link button:focus {
+    outline: none;
+    box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
+}
+
+/* Button active style */
+.sign-up-link button:active {
+    transform: translateY(1px);
+}
+
+/* Hidden form */
+.hidden {
+    display: none;
+}
+
+/* Sign-up form */
+#signUpForm {
+    margin-top: 0px;
+    padding-top: 30px;
+    border-top: 1px solid #e1e1e1;
+}
+
+/* Disabled button state */
+.submit-btn:disabled {
+    background-color: #b0c4de;
+    cursor: not-allowed;
+}
+
+/* Forgot Password Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: scale(0.8);
+    animation: modal-zoom 0.3s forwards;
+}
+
+@keyframes modal-zoom {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal .input-group {
+    margin-bottom: 20px;
+}
+
+.modal .submit-btn {
+    width: auto;
+    padding: 10px 20px;
+    background-color: #357ABD;
+}
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #4A90E2;
+}
+
+/* Footer Section */
+.footer-links {
+    position: relative;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.footer-links a {
+    color: #4A90E2;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #357ABD;
+}
+
+/* Logo styling */
+.logo {
+    display: block;
+    margin: 0 auto;                /* Center the logo horizontally */
+    border-radius: 40px;           /* Optional: round corners */
+    height: 33px;                  /* Fixed height for the logo */
+    margin-bottom: 10px;           /* Space below the logo */
+}
+
+/* For mobile responsiveness */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .input-group input,
+    .submit-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+}

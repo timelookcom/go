@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Image Search - JS Only</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        input[type="file"] {
+            margin: 20px;
+        }
+        #results img {
+            margin: 10px;
+            max-width: 150px;
+            max-height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Reverse Image Search (Pure JavaScript)</h1>
+    
+    <!-- Image Upload Section -->
+    <input type="file" id="imageInput" accept="image/*">
+    
+    <div id="results"></div>
+</div>
+
+<script>
+    // Predefined set of images for comparison (These would be your local images or URL links to images)
+    const predefinedImages = [
+        { src: 'https://www.w3schools.com/html/img_chania.jpg', alt: 'Image 1' },
+        { src: 'https://www.w3schools.com/html/img_forest.jpg', alt: 'Image 2' },
+        { src: 'https://www.w3schools.com/html/img_lights.jpg', alt: 'Image 3' },
+        { src: 'https://www.w3schools.com/html/img_5terre.jpg', alt: 'Image 4' }
+    ];
+
+    const imageInput = document.getElementById('imageInput');
+    const resultsDiv = document.getElementById('results');
+
+    imageInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgData = e.target.result;
+                searchSimilarImages(imgData);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function searchSimilarImages(inputImageData) {
+        const inputImage = new Image();
+        inputImage.src = inputImageData;
+
+        inputImage.onload = function () {
+            const results = [];
+            
+            predefinedImages.forEach(function (predefinedImage) {
+                // Create an image element for the predefined image
+                const predefinedImg = new Image();
+                predefinedImg.src = predefinedImage.src;
+                
+                predefinedImg.onload = function () {
+                    // Compare the input image with the predefined image using a simple pixel-by-pixel comparison
+                    if (areImagesSimilar(inputImage, predefinedImg)) {
+                        results.push(predefinedImage);
+                    }
+                    displayResults(results);
+                };
+            });
+        };
+    }
+
+    function areImagesSimilar(inputImage, predefinedImage) {
+        // Compare images using pixel-by-pixel comparison
+        // For simplicity, this function compares the dimensions, and you could add a pixel-level check here
+        
+        const inputCanvas = document.createElement('canvas');
+        const inputCtx = inputCanvas.getContext('2d');
+        inputCanvas.width = inputImage.width;
+        inputCanvas.height = inputImage.height;
+        inputCtx.drawImage(inputImage, 0, 0);
+
+        const predefinedCanvas = document.createElement('canvas');
+        const predefinedCtx = predefinedCanvas.getContext('2d');
+        predefinedCanvas.width = predefinedImage.width;
+        predefinedCanvas.height = predefinedImage.height;
+        predefinedCtx.drawImage(predefinedImage, 0, 0);
+
+        // Get pixel data for both images
+        const inputPixels = inputCtx.getImageData(0, 0, inputImage.width, inputImage.height);
+        const predefinedPixels = predefinedCtx.getImageData(0, 0, predefinedImage.width, predefinedImage.height);
+
+        // Simple pixel comparison (you can improve this by comparing pixel colors or implementing a hash function)
+        const threshold = 0.9;  // 90% similarity
+        let matchCount = 0;
+        let totalPixels = inputPixels.data.length / 4;
+
+        for (let i = 0; i < totalPixels; i++) {
+            const inputR = inputPixels.data[i * 4];
+            const inputG = inputPixels.data[i * 4 + 1];
+            const inputB = inputPixels.data[i * 4 + 2];
+
+            const predefinedR = predefinedPixels.data[i * 4];
+            const predefinedG = predefinedPixels.data[i * 4 + 1];
+            const predefinedB = predefinedPixels.data[i * 4 + 2];
+
+            // Compare color values (basic similarity)
+            const colorDiff = Math.abs(inputR - predefinedR) + Math.abs(inputG - predefinedG) + Math.abs(inputB - predefinedB);
+            if (colorDiff < 30) {  // If the color difference is low, count it as a match
+                matchCount++;
+            }
+        }
+
+        const similarity = matchCount / totalPixels;
+        return similarity > threshold;
+    }
+
+    function displayResults(results) {
+        resultsDiv.innerHTML = ''; // Clear previous results
+        
+        if (results.length === 0) {
+            resultsDiv.innerHTML = '<p>No similar images found.</p>';
+        } else {
+            results.forEach(function (result) {
+                const imgElement = document.createElement('img');
+                imgElement.src = result.src;
+                imgElement.alt = result.alt;
+                resultsDiv.appendChild(imgElement);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
